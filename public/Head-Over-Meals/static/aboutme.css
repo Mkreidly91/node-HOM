@@ -1,0 +1,204 @@
+:root {
+  --aboutme-font: "Poppins", sans-serif;
+  --quote-font-size: clamp(0.7rem, 1.5vw, 1.5rem);
+  --about-font-size: clamp(0.7rem, 1.5vw, 1.5rem);
+}
+body {
+  background-color: #e9e7e7;
+}
+
+.main-container {
+  /* height:100%; */
+  margin-top: 15%;
+  display: grid;
+  grid-template-areas: "top-section top-section" "left-section right-section";
+  row-gap: 12rem;
+  column-gap: 3rem;
+  grid-template-columns: 50% auto;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 10%;
+  font-family: var(--aboutme-font);
+  font-weight: 200;
+}
+
+#image-quote {
+  position: relative;
+  height: fit-content;
+  grid-area: top-section;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#image {
+  width: 40%;
+  position: relative;
+  height: fit-content;
+  margin-left: 20%;
+}
+
+#image img {
+  max-width: 100%;
+  height: auto;
+}
+
+#box {
+  position: absolute;
+  bottom: 30%;
+  left: 10%;
+
+  width: 100%;
+  height: 80%;
+
+  background-color: #b5e9d2a6;
+
+  z-index: -1;
+}
+
+#image img,
+#box,
+#box-2,
+#image-quote p,
+#about-text,
+#about-image img {
+  border-radius: 25px;
+}
+
+#image-quote p {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+
+  width: 40%;
+
+  background-color: #f16e5b;
+  text-align: center;
+
+  font-weight: 500;
+  font-size: var(--quote-font-size);
+
+  padding: 2rem;
+  z-index: 1;
+}
+
+#about-image {
+  position: relative;
+  grid-area: left-section;
+  height: fit-content;
+}
+
+#about-image img {
+  width: 100%;
+}
+#box-2 {
+  position: absolute;
+  bottom: 30%;
+  right: 10%;
+
+  width: 100%;
+  height: 80%;
+
+  background-color: #b5e9d2a6;
+
+  z-index: -1;
+}
+
+#about-text {
+  grid-area: right-section;
+
+  font-family: var(--aboutme-font);
+  font-size: var(--about-font-size);
+  font-weight: 300;
+
+  background-color: #f3ecec;
+  padding: 1rem;
+}
+
+#about-text p:nth-of-type(1) {
+  font-weight: 500;
+  font-size: calc(var(--about-font-size) + 0.3rem);
+}
+
+#image img,
+#about-image img {
+  filter: drop-shadow(-2px 2px 5px #00000059);
+}
+
+#image-quote p,
+#about-text {
+  box-shadow: -2px 2px 5px #00000059;
+}
+
+@media (max-width: 767.9px) {
+  .main-container {
+    grid-template-areas: "top-section" "left-section" "right-section";
+    grid-template-rows: auto auto auto;
+    grid-template-columns: auto;
+
+    height: 100%;
+    margin-top: 30%;
+  }
+
+  #image {
+    width: 70%;
+  }
+
+  #image-quote p {
+    width: 60%;
+    top: 60%;
+    font-size: var(--quote-font-size - 0.3rem);
+  }
+
+  #about-image {
+    width: 80%;
+    justify-self: center;
+    margin-bottom: -10rem;
+  }
+}
+
+/*animations for about me page*/
+.right-in {
+  animation: right-in 1s linear forwards;
+}
+
+.left-in {
+  animation: left-in 1s linear forwards;
+}
+
+.bottom-in {
+  animation: bottom-in 1s linear forwards;
+}
+
+@keyframes right-in {
+  0% {
+    transform: translateX(10%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bottom-in {
+  0% {
+    transform: translateY(10%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes left-in {
+  0% {
+    transform: translateX(-10%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

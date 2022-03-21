@@ -1,0 +1,71 @@
+<html>
+    <head>
+
+      <style>
+           body{
+      font-family:"Trebuchet MS", Helvetica, sans-serif;
+ }
+ .email-body{
+    background-color:#5ac083;
+    border-radius:25px;
+    padding:5%;
+ }
+ .email-body h1{
+     text-align:center;
+     font-size:max(3rem,5vw);
+     color:#ea563f;
+ }
+ p{
+    font-size:max(1.5rem,2vw);
+ }
+ .credentials{
+
+    display:flex;
+    justify-content:start;
+    align-items:center;
+ }
+ #logo img{
+     width:100%;
+ }
+#info{
+    margin-left:1rem;
+    align-self:center;
+}
+#info h1,#info h2{
+    margin:0;
+    font-family:"Trebuchet MS", Helvetica, sans-serif;
+    font-weight:500;
+}
+
+h1{
+     font-size:max(3rem,3vw);
+}
+h2{
+    font-size:max(2rem,2vw);
+    text-decoration:underline;
+    text-align:center;
+}
+      </style>
+    </head>
+
+    <body>
+    <div class="email-body">
+        <h1>A step towards better health</h1>
+        <p>{{ body }}</p>
+    </div>
+    <br> <br>
+    <div class="credentials">
+    <div id ="logo">
+        <img alt="Head Over Meals Logo"
+        src ="{{url_for('static',filename = 'src/template/headovermeals.png')}}"
+        width="300px"
+        height="300px"
+        >
+    </div>
+    <div id ="info">
+        <h1>Kamar Kreidly</h1>
+        <h2>Licenced Dietician</h2>
+    </div>
+    </div>
+    </body>
+</html>

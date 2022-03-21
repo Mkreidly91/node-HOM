@@ -1,0 +1,224 @@
+[
+  {
+    "name": "Chocolate Banana Bread",
+    "kcal": 180,
+    "time": 60,
+    "servings": "15 pieces",
+    "servingType": "piece",
+    "src": [
+      "chocolate-banana-bread/cover.jpeg",
+      "chocolate-banana-bread/recipe-1.jpeg",
+      "chocolate-banana-bread/recipe-2.jpeg",
+      "chocolate-banana-bread/recipe-3.jpeg",
+      "chocolate-banana-bread/recipe-4.jpeg",
+      "chocolate-banana-bread/enjoy.jpeg"
+    ]
+  },
+
+  {
+    "name": "Chocolate Banana Oatmeal",
+    "kcal": 180,
+    "time": 10,
+    "servings": "2 cups",
+    "servingType": "cup",
+    "src": [
+      "chocolate-banana-oatmeal/cover.jpeg",
+      "chocolate-banana-oatmeal/recipe.jpeg"
+    ]
+  },
+  {
+    "name": "Apple Pie Oatmeal",
+    "kcal": 240,
+    "time": 10,
+    "servings": "1 serving",
+    "servingType": "serving",
+    "src": ["apple-pie-oatmeal/cover.jpeg", "apple-pie-oatmeal/recipe.jpeg"]
+  },
+  {
+    "name": "White Chocolate Oatmeal Cookies",
+    "kcal": 160,
+    "time": 30,
+    "servings": "15 cookies",
+    "servingType": "cookie",
+    "src": [
+      "white-chocolate-oatmeal-cookies/cover.jpeg",
+      "white-chocolate-oatmeal-cookies/recipe-1.jpeg",
+      "white-chocolate-oatmeal-cookies/recipe-2.jpeg"
+    ]
+  },
+  {
+    "name": "Almond Butter",
+    "kcal": 45,
+    "time": 20,
+    "servings": "1 jar",
+    "servingType": "1 tsp",
+    "src": [
+      "almond-butter/cover.jpeg",
+      "almond-butter/recipe-1.jpeg",
+      "almond-butter/recipe-2.jpeg",
+      "almond-butter/recipe-3.jpeg"
+    ]
+  },
+  {
+    "name": "Whole Wheat Manakeesh",
+    "kcal": 100,
+    "time": 165,
+    "servings": "10 pieces",
+    "servingType": "piece",
+    "src": [
+      "whole-wheat-manakeesh/cover.jpeg",
+      "whole-wheat-manakeesh/recipe-1.jpeg",
+      "whole-wheat-manakeesh/recipe-2.jpeg"
+    ]
+  },
+  {
+    "name": "Mhallabeyye Amareddine",
+    "kcal": 180,
+    "time": 70,
+    "servings": "6 bowls",
+    "servingType": "bowl",
+    "src": [
+      "mhallabeyye-amareddine/cover.jpg",
+      "mhallabeyye-amareddine/recipe-1.jpg",
+      "mhallabeyye-amareddine/recipe-2.jpg"
+    ]
+  },
+  {
+    "name": "Healthy Lazy Cake",
+    "kcal": 170,
+    "time": 165,
+    "servings": "10 slices",
+    "servingType": "slice",
+    "src": [
+      "healthy-lazy-cake/cover.jpg",
+      "healthy-lazy-cake/recipe-1.jpg",
+      "healthy-lazy-cake/enjoy.jpg"
+    ]
+  },
+  {
+    "name": "Oatmeal Cherry Crumble Pie",
+    "kcal": 240,
+    "time": 80,
+    "servings": "10 slices",
+    "servingType": "slice",
+    "src": [
+      "oatmeal-cherry-crumble-pie/cover.jpg",
+      "oatmeal-cherry-crumble-pie/recipe-1.jpg",
+      "oatmeal-cherry-crumble-pie/recipe-2.jpg",
+      "oatmeal-cherry-crumble-pie/enjoy.jpg"
+    ]
+  },
+  {
+    "name": "Chocolate Avocado Brownies",
+    "kcal": 150,
+    "time": 45,
+    "servings": "9 pieces",
+    "servingType": "piece",
+    "src": [
+      "chocolate-avocado-brownies/cover.jpg",
+      "chocolate-avocado-brownies/recipe-1.jpg",
+      "chocolate-avocado-brownies/enjoy.jpg"
+    ]
+  },
+
+  {
+    "name": "Healthy Chocolate Pudding",
+    "kcal": 240,
+    "time": 10,
+    "servings": "5 bowls",
+    "servingType": "bowl",
+    "src": [
+      "healthy-chocolate-pudding/cover.jpg",
+      "healthy-chocolate-pudding/recipe-1.jpg",
+      "healthy-chocolate-pudding/enjoy.jpg"
+    ]
+  },
+  {
+    "name": "Banana Muffins",
+    "kcal": 135,
+    "time": 45,
+    "servings": "12 muffins",
+    "servingType": "muffin",
+    "src": ["banana-muffins/cover.jpg", "banana-muffins/recipe-1.jpg"]
+  },
+  {
+    "name": "Healthy Chocolate Cookies",
+    "kcal": 190,
+    "time": 20,
+    "servings": "10-12 cookies",
+    "servingType": "cookie",
+    "src": [
+      "healthy-chocolate-cookies/cover.jpg",
+      "healthy-chocolate-cookies/recipe-1.jpg",
+      "healthy-chocolate-cookies/recipe-2.jpg",
+      "healthy-chocolate-cookies/enjoy.jpg"
+    ]
+  },
+
+  {
+    "name": "Blonde Brownies",
+    "kcal": 170,
+    "time": 40,
+    "servings": "9 pieces",
+    "servingType": "piece",
+    "src": [
+      "blonde-brownies/cover.jpg",
+      "blonde-brownies/recipe-1.jpg",
+      "blonde-brownies/recipe-2.jpg",
+      "blonde-brownies/enjoy.jpg"
+    ]
+  },
+
+  {
+    "name": "Yogurt Loaf Cake",
+    "kcal": 140,
+    "time": 50,
+    "servings": "15 slices",
+    "servingType": "slice",
+    "src": [
+      "yogurt-loaf-cake/cover.jpg",
+      "yogurt-loaf-cake/recipe-1.jpg",
+      "yogurt-loaf-cake/recipe-2.jpg",
+      "yogurt-loaf-cake/enjoy.jpg"
+    ]
+  },
+  {
+    "name": "Low-fat Apple Cake",
+    "kcal": 120,
+    "time": 50,
+    "servings": "15 servings",
+    "servingType": "slice",
+    "src": [
+      "low-fat-apple-cake/cover.jpg",
+      "low-fat-apple-cake/recipe-1.jpg",
+      "low-fat-apple-cake/recipe-2.jpg",
+      "low-fat-apple-cake/enjoy.jpg"
+    ]
+  },
+  {
+    "name": "Easy Chocolate Banana Oat Cookies",
+    "kcal": 90,
+    "time": 30,
+    "servings": "9 cookies",
+    "servingType": "cookie",
+    "src": [
+      "easy-chocolate-banana-oat-cookies/cover.jpg",
+      "easy-chocolate-banana-oat-cookies/recipe-1.jpg",
+      "easy-chocolate-banana-oat-cookies/recipe-2.jpg",
+      "easy-chocolate-banana-oat-cookies/enjoy.jpg"
+    ]
+  },
+  {
+    "name": "Healthy Chocolate Muffins",
+    "kcal": 160,
+    "time": 40,
+    "servings": "12 muffins",
+    "servingType": "muffin",
+    "src": [
+      "healthy-chocolate-muffins/cover.jpg",
+      "healthy-chocolate-muffins/recipe-1.jpg",
+      "healthy-chocolate-muffins/recipe-2.jpg",
+      "healthy-chocolate-muffins/enjoy.jpg"
+    ]
+  }
+]
