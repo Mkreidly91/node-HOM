@@ -32,6 +32,7 @@ let page = async () => {
       $("#myModal").modal("show");
     }, animationTimer);
   });
+
   $("#previous").click(() => {
     $("#myModal").modal("hide");
     setTimeout(() => {
