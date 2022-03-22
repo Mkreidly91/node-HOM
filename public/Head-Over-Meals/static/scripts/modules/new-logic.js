@@ -1,9 +1,13 @@
-let gallery_fill = (recipeList) => {
-  // let recipeListener = {};
-  // document.addEventListener("build", (event) => {
-  //   console.log(event, "called");
-  // });
-  // return;
+
+const createDomElement = (elementType, options) => {
+  const element = document.createElement(elementType);
+  Object.keys(options).forEach((key) => {
+    element.setAttribute(key, options[key]);
+  });
+  return element;
+};
+
+const gallery_fill = (recipeList) => {
   let row = document.getElementsByClassName("row");
   for (let i = 0; i < recipeList.length; i++) {
     var col = document.createElement("div");
@@ -60,119 +64,70 @@ let gallery_fill = (recipeList) => {
   }
 };
 
-let create_carousels = (recipes) => {
-  let recipe_carousels = [];
-  for (let i = 0; i < recipes.length; i++) {
-    let content = [];
-    let recipe = recipes[i];
-    const ul = [];
 
-    for (let x = 0; x < recipe.src.length; x++) {
-      //creates new carousel-item
-      let new_div;
-      if (x == 0) {
-        new_div = document.createElement("div");
-        new_div.setAttribute("class", "carousel-item active");
-        new_div.setAttribute("id", "active");
-      } else {
-        new_div = document.createElement("div");
-        new_div.setAttribute("class", "carousel-item");
-      }
-
-      let li = document.createElement("li");
-      li.setAttribute("class", "item" + (x + 1));
-
-      //creates image element inside the carousel-item,then sets the src,and appends it to div.
-      var img = document.createElement("img");
-      img.setAttribute("src", "static/src/recipes/" + recipe.src[x]);
-      new_div.appendChild(img);
-      content.push(new_div);
-
-      //appends the list items to the ul.
-      ul.push(li);
-    }
-
-    // recipe_carousels[recipe.name] = {
-    //   content: content,
-    //   indicators: ul,
-    // };
-    recipe_carousels.push({
-      name: recipe.name,
-      content: content,
-      indicators: ul,
+const create_img_carousel = (recipe, index) => {
+  const ul = createDomElement("ul", {
+    id: "indicator-" + index,
+    class: "carousel-indicators",
+  });
+  const content = createDomElement("div", {
+    id: "imageTabs" + index,
+  });
+  const innerCarousel = createDomElement("div", {
+    class: "inner-tabs",
+    id: "inner-" + index,
+  });
+  const tabContent = createDomElement("div", {
+    class: "tab-content",
+  });
+  for (let x = 0; x < recipe.src.length; x++) {
+    const new_div_options =
+      x == 0
+        ? { class: "tab-pane active tab-pane" + x, id: "step" + index + x }
+        : { class: "tab-pane tab-pane" + x, id: "step" + index + x };
+    const new_div = createDomElement("div", new_div_options);
+    const img = createDomElement("img", {
+      src: "static/src/recipes/" + recipe.src[x],
     });
+    const liOptions =
+      x === 0
+        ? {
+            class: "active",
+            "data-target": "#step" + index + x,
+            "data-toggle": "tab",
+          }
+        : { "data-target": "#step" + index + x, "data-toggle": "tab" };
+    const li = createDomElement("li", {
+      class: "item" + (x + 1),
+      "data-target": "#step" + index + x,
+      "data-toggle": "tab",
+    });
+    $(li).click(function () {
+      $(content).carousel(x);
+    });
+    //creates image element inside the carousel-item,then sets the src,and appends it to div.
+    new_div.appendChild(img);
+    tabContent.appendChild(new_div);
+    //appends the list items to the ul.
+    ul.appendChild(li);
   }
-
-  return recipe_carousels;
+  innerCarousel.appendChild(content);
+  innerCarousel.appendChild(tabContent);
+  return { content: innerCarousel, ul };
 };
 
-let nested_carousel = (recipes) => {
+const create_carousels = (recipes) => {
   for (let i = 0; i < recipes.length; i++) {
-    let recipe = recipes[i];
-    let new_div;
-
-    //create slideshow and indicators for nested carousel.
-    new_div = document.createElement("div");
-    new_div.setAttribute("class", "carousel-item");
-    let carousel = document.createElement("div");
-    carousel.setAttribute("class", "carousel slide");
-    carousel.setAttribute("id", recipe.name + " carousel");
-
-    let slideshow = document.createElement("div");
-    slideshow.setAttribute("class", "carousel-inner");
-    slideshow.setAttribute("id", recipe.name + " slideshow");
-
-    let indicators = document.createElement("ul");
-    indicators.setAttribute("class", "carousel-indicators");
-    indicators.setAttribute("id", recipe.name + " indicators");
-
-    for (let i = 0; i < recipe.indicators.length; i++) {
-      indicators.appendChild(recipe.indicators[i]);
-    }
-
-    for (let i = 0; i < recipe.content.length; i++) {
-      slideshow.appendChild(recipe.content[i]);
-    }
-
-    carousel.appendChild(indicators);
-    carousel.appendChild(slideshow);
-    new_div.appendChild(carousel);
-    new_div.setAttribute("id", recipe.name);
-
-    //append nested carousel to main carousel
-    document.getElementById("slideshow").appendChild(new_div);
+    const recipe = recipes[i];
+    const { content, ul } = create_img_carousel(recipe, i);
+    const carouselItem = createDomElement("div", { class: "carousel-item", id: "recipe-item-" + i })
+    carouselItem.appendChild(content);
+    carouselItem.appendChild(ul);
+    document.getElementById("slideshow").appendChild(carouselItem);
   }
 };
 
-//sets the active element,or returns the index of active element if no argument is provided.
-let active_element = (element) => {
-  let slideshow = document.getElementById("slideshow").children;
-  if (element) {
-    let name = element.title;
-    for (let slide of slideshow) {
-      if (name === slide.id) {
-        slide.classList.add("active");
-      } else {
-        slide.classList.remove("active");
-      }
-      let carousel = document.getElementById(name + " carousel");
-      let indicators = document.getElementById(name + " indicators");
-
-      $(carousel).carousel("pause");
-      for (let i = 0; i < indicators.children.length; i++) {
-        let child = indicators.children[i];
-        $(child).click(function () {
-          $(carousel).carousel(i);
-        });
-      }
-    }
-  } else {
-    for (let i = 0; i < slideshow.length; i++) {
-      if (slideshow[i].classList.contains("active")) {
-        return i;
-      }
-    }
-  }
+export {
+  gallery_fill,
+  create_carousels,
 };
-
-export { gallery_fill, create_carousels, nested_carousel, active_element };

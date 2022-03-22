@@ -2,9 +2,9 @@ import { getRecipes } from "./modules/fetch-recipes.js";
 import {
   gallery_fill,
   create_carousels,
-  nested_carousel,
-  active_element,
 } from "./modules/new-logic.js";
+
+const animationTimer = 1000;
 
 function main() {
   page();
@@ -13,33 +13,12 @@ function main() {
 let page = async () => {
   let recipe = await getRecipes();
   gallery_fill(recipe);
-  let carousels = create_carousels(recipe);
-  nested_carousel(carousels);
-
-  $(".recipe").click(function () {
-    active_element(this);
-    $("#myModal").modal("handleUpdate");
+  create_carousels(recipe);
+  
+  $(".recipe").click(function (element) {
+    const id = element.currentTarget.id 
+    $("#myCarousel").find('#recipe-item-' + id).addClass('active');
     $("#myModal").modal("show");
-  });
-
-  let elements = document.getElementsByClassName("recipe");
-  let animationTimer = 1000;
-  $("#next").click(() => {
-    $("#myModal").modal("hide");
-    setTimeout(() => {
-      let current = active_element();
-      active_element(elements[current + 1]);
-      $("#myModal").modal("show");
-    }, animationTimer);
-  });
-
-  $("#previous").click(() => {
-    $("#myModal").modal("hide");
-    setTimeout(() => {
-      let current = active_element();
-      active_element(elements[current - 1]);
-      $("#myModal").modal("show");
-    }, animationTimer);
   });
 
   $("#myModal").on("show.bs.modal", function () {
@@ -52,8 +31,9 @@ let page = async () => {
     $("#myModal").animate({ opacity: "0" }, animationTimer);
     //after animation is done,remove the display block class, since it was interfering with the custom animation.
     setTimeout(() => {
+      $(".carousel-item.active").removeClass('active');
       $("#myModal").removeClass("d-block");
-    }, 1000);
+    }, animationTimer);
   });
 };
 
