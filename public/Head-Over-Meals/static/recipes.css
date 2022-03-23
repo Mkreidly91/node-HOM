@@ -419,3 +419,10 @@ input[type="search"]::-webkit-search-cancel-button {
 footer {
   margin-top: 2rem;
 }
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  background-color: transparent !important;
+}
+.nav-item {
+  transform: scale(1) !important;
+}

@@ -15,9 +15,9 @@ let page = async () => {
   gallery_fill(recipe);
   create_carousels(recipe);
   
-  $(".recipe").click(function (element) {
-    const id = element.currentTarget.id 
-    $("#myCarousel").find('#recipe-item-' + id).addClass('active');
+  $(".recipe").click(function () {
+    const id = parseInt(this.id);
+    $("#myCarousel").carousel(id);
     $("#myModal").modal("show");
   });
 
@@ -31,7 +31,6 @@ let page = async () => {
     $("#myModal").animate({ opacity: "0" }, animationTimer);
     //after animation is done,remove the display block class, since it was interfering with the custom animation.
     setTimeout(() => {
-      $(".carousel-item.active").removeClass('active');
       $("#myModal").removeClass("d-block");
     }, animationTimer);
   });
