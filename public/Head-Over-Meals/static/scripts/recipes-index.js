@@ -11,7 +11,7 @@ let page = async () => {
   let recipe = await getRecipes();
   gallery_fill(recipe);
   carousel_fill(recipe);
-  
+  console.log('mostafa learning git');
   $(".recipe").click(function () {
     const id = parseInt(this.id);
     $("#myCarousel").carousel(id);
