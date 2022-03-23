@@ -4,11 +4,7 @@ import { gallery_fill, carousel_fill } from "./modules/new-logic.js";
 const animationTimer = 1000;
 
 let page = async () => {
-<<<<<<< HEAD
-  console.log('ismail made a change');
-=======
-  console.log("my change is better than yours");
->>>>>>> mostafa/rs
+  console.log("ismail made a change");
   let recipe = await getRecipes();
   gallery_fill(recipe);
   carousel_fill(recipe);
