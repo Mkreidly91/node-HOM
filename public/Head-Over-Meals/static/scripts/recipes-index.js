@@ -8,6 +8,7 @@ const animationTimer = 1000;
 
 
 let page = async () => {
+  console.log('ismail made a change');
   let recipe = await getRecipes();
   gallery_fill(recipe);
   carousel_fill(recipe);
