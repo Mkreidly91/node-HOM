@@ -1,28 +1,6 @@
-const createDomElement = (elementType, options) => {
-  const element = document.createElement(elementType);
-  if (options)
-    Object.keys(options).forEach((key) => {
-      element.setAttribute(key, options[key]);
-    });
-  return element;
-};
+import { createDomElement, appendMany, displayTime } from "./helper.js";
 
-//helper function for displaying time.
-const displayTime = (mins) => {
-  let time = mins / 60;
-  let hours = Math.floor(time);
-  let minutes = Math.round((time - hours) * 60);
-  if (hours == 0) {
-    return minutes + "min(s)";
-  }
-  if (minutes == 0) {
-    return hours + " hour(s)";
-  } else {
-    return hours + " hour(s)," + minutes + " min(s)";
-  }
-};
-
-const gallery_fill = (recipeList) => {
+let gallery_fill = (recipeList) => {
   let row = document.getElementsByClassName("row");
   for (let i = 0; i < recipeList.length; i++) {
     const col = createDomElement("div", {
@@ -32,37 +10,40 @@ const gallery_fill = (recipeList) => {
     });
 
     //recipeGrid will use display:grid to arrange all the elements.
-    const recipeGrid = createDomElement("div", { class: "recipe-grid" });
-    //create divs for the cover image and the title.
-    const imageTitle = createDomElement("div", { class: "image-title" });
-    const image = createDomElement("img", {
-      src: "static/src/recipes/" + recipeList[i].src[0],
+    const recipeGrid = createDomElement("div", {
+      class: "recipe-grid",
     });
-    const title = createDomElement("h1");
-    title.innerHTML = recipeList[i].name;
 
-    /*var info = document.createElement("div");
-    info.setAttribute("class", "info");*/
+    //create divs for the cover image and the title.
+    const imageTitle = createDomElement("div", {
+      class: "image-title",
+    });
+
+    const image = createDomElement("img", {
+      src: `static/src/recipes/${recipeList[i].src[0]}`,
+      width: "300",
+      height: "200",
+    });
+
+    const title = createDomElement("h1");
+    title.innerText = recipeList[i].name;
+
     const kcal = createDomElement("p");
     const servings = createDomElement("p");
     const prep = createDomElement("p");
 
-    kcal.innerHTML = recipeList[i].kcal + " kcal/" + recipeList[i].servingType;
-    servings.innerHTML = "Yield: " + recipeList[i].servings;
-    prep.innerHTML = "Total time: " + displayTime(recipeList[i].time);
+    kcal.innerText = `${recipeList[i].kcal} kcal ${recipeList[i].servingType}`;
+    servings.innerText = `Yield: ${recipeList[i].servings}`;
+    prep.innerText = `Total time: ${displayTime(recipeList[i].time)}`;
 
     //append all the child elements to the grid.
-    recipeGrid.appendChild(image);
-    recipeGrid.appendChild(title);
-    recipeGrid.appendChild(kcal);
-    recipeGrid.appendChild(servings);
-    recipeGrid.appendChild(prep);
+    appendMany(recipeGrid, [image, title, kcal, servings, prep]);
     col.appendChild(recipeGrid);
     row[0].appendChild(col);
   }
 };
 
-const create_img_carousel = (recipe, index) => {
+const create_tabs = (recipe, index) => {
   const ul = createDomElement("ul", {
     id: "indicator-" + index,
     role: "tablist",
@@ -107,10 +88,10 @@ const create_img_carousel = (recipe, index) => {
   return { content: innerCarousel, ul };
 };
 
-const create_carousels = (recipes) => {
+const carousel_fill = (recipes) => {
   for (let i = 0; i < recipes.length; i++) {
     const recipe = recipes[i];
-    const { content, ul } = create_img_carousel(recipe, i);
+    const { content, ul } = create_tabs(recipe, i);
     const carouselItem = createDomElement("div", {
       class: `carousel-item ${i === 0 ? "active" : ""}`,
       id: "recipe-item-" + i,
@@ -121,4 +102,4 @@ const create_carousels = (recipes) => {
   }
 };
 
-export { gallery_fill, create_carousels };
+export { gallery_fill, carousel_fill };

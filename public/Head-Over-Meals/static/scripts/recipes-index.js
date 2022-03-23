@@ -1,24 +1,22 @@
 import { getRecipes } from "./modules/fetch-recipes.js";
 import {
   gallery_fill,
-  create_carousels,
+  carousel_fill,
 } from "./modules/new-logic.js";
 
 const animationTimer = 1000;
 
-function main() {
-  page();
-}
 
 let page = async () => {
   let recipe = await getRecipes();
   gallery_fill(recipe);
-  create_carousels(recipe);
+  carousel_fill(recipe);
   
   $(".recipe").click(function () {
     const id = parseInt(this.id);
     $("#myCarousel").carousel(id);
     $("#myModal").modal("show");
+    $("#myModal").modal("handleUpdate");
   });
 
   $("#myModal").on("show.bs.modal", function () {
@@ -35,5 +33,9 @@ let page = async () => {
     }, animationTimer);
   });
 };
+
+function main() {
+  page();
+}
 
 main();
