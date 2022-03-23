@@ -1,17 +1,14 @@
 import { getRecipes } from "./modules/fetch-recipes.js";
-import {
-  gallery_fill,
-  carousel_fill,
-} from "./modules/new-logic.js";
+import { gallery_fill, carousel_fill } from "./modules/new-logic.js";
 
 const animationTimer = 1000;
 
-
 let page = async () => {
+  console.log("my change is better than yours");
   let recipe = await getRecipes();
   gallery_fill(recipe);
   carousel_fill(recipe);
-  console.log('mostafa learning git');
+  console.log("mostafa learning git");
   $(".recipe").click(function () {
     const id = parseInt(this.id);
     $("#myCarousel").carousel(id);
