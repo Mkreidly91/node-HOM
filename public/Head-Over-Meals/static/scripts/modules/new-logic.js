@@ -1,178 +1,115 @@
+import { createDomElement, appendMany, displayTime } from "./helper.js";
+
 let gallery_fill = (recipeList) => {
-  // let recipeListener = {};
-  // document.addEventListener("build", (event) => {
-  //   console.log(event, "called");
-  // });
-  // return;
   let row = document.getElementsByClassName("row");
   for (let i = 0; i < recipeList.length; i++) {
-    var col = document.createElement("div");
-    col.setAttribute("class", "col-1 recipe");
-    col.setAttribute("id", i);
-    col.setAttribute("title", recipeList[i].name);
+    const col = createDomElement("div", {
+      class: "col-1 recipe",
+      id: i,
+      title: recipeList[i].name,
+    });
 
     //recipeGrid will use display:grid to arrange all the elements.
-    var recipeGrid = document.createElement("div");
-    recipeGrid.setAttribute("class", "recipe-grid");
+    const recipeGrid = createDomElement("div", {
+      class: "recipe-grid",
+    });
 
     //create divs for the cover image and the title.
-    var imageTitle = document.createElement("div");
-    imageTitle.setAttribute("class", "image-title");
-    var image = document.createElement("img");
-    image.src = "static/src/recipes/" + recipeList[i].src[0];
-    image.width = "300";
-    image.height = "200";
-    var title = document.createElement("h1");
-    title.innerHTML = recipeList[i].name;
+    const imageTitle = createDomElement("div", {
+      class: "image-title",
+    });
 
-    /*var info = document.createElement("div");
-    info.setAttribute("class", "info");*/
-    var kcal = document.createElement("p");
-    let servings = document.createElement("p");
-    var prep = document.createElement("p");
+    const image = createDomElement("img", {
+      src: `static/src/recipes/${recipeList[i].src[0]}`,
+      width: "300",
+      height: "200",
+    });
 
-    //helper function for displaying time.
-    let displayTime = (mins) => {
-      let time = mins / 60;
-      let hours = Math.floor(time);
-      let minutes = Math.round((time - hours) * 60);
-      if (hours == 0) {
-        return minutes + "min(s)";
-      }
-      if (minutes == 0) {
-        return hours + " hour(s)";
-      } else {
-        return hours + " hour(s)," + minutes + " min(s)";
-      }
-    };
-    kcal.innerHTML = recipeList[i].kcal + " kcal/" + recipeList[i].servingType;
-    servings.innerHTML = "Yield: " + recipeList[i].servings;
-    prep.innerHTML = "Total time: " + displayTime(recipeList[i].time);
+    const title = createDomElement("h1");
+    title.innerText = recipeList[i].name;
+
+    const kcal = createDomElement("p");
+    const servings = createDomElement("p");
+    const prep = createDomElement("p");
+
+    kcal.innerText = `${recipeList[i].kcal} kcal ${recipeList[i].servingType}`;
+    servings.innerText = `Yield: ${recipeList[i].servings}`;
+    prep.innerText = `Total time: ${displayTime(recipeList[i].time)}`;
 
     //append all the child elements to the grid.
-    recipeGrid.appendChild(image);
-    recipeGrid.appendChild(title);
-    recipeGrid.appendChild(kcal);
-    recipeGrid.appendChild(servings);
-    recipeGrid.appendChild(prep);
+    appendMany(recipeGrid, [image, title, kcal, servings, prep]);
     col.appendChild(recipeGrid);
     row[0].appendChild(col);
   }
 };
 
-let create_carousels = (recipes) => {
-  let recipe_carousels = [];
-  for (let i = 0; i < recipes.length; i++) {
-    let content = [];
-    let recipe = recipes[i];
-    const ul = [];
+const create_tabs = (recipe, i) => {
+  const content = createDomElement("div", {
+    id: `imageTab-${i}`,
+  });
 
-    for (let x = 0; x < recipe.src.length; x++) {
-      //creates new carousel-item
-      let new_div;
-      if (x == 0) {
-        new_div = document.createElement("div");
-        new_div.setAttribute("class", "carousel-item active");
-        new_div.setAttribute("id", "active");
-      } else {
-        new_div = document.createElement("div");
-        new_div.setAttribute("class", "carousel-item");
-      }
+  const ul = createDomElement("div", {
+    class: "carousel-indicators",
+    id: `indicator-${i}`,
+  });
 
-      let li = document.createElement("li");
-      li.setAttribute("class", "item" + (x + 1));
+  const innerTabs = createDomElement("div", {
+    class: "inner-tabs",
+    id: `inner-tab-${i}`,
+  });
 
-      //creates image element inside the carousel-item,then sets the src,and appends it to div.
-      var img = document.createElement("img");
-      img.setAttribute("src", "static/src/recipes/" + recipe.src[x]);
-      new_div.appendChild(img);
-      content.push(new_div);
+  const tabContent = createDomElement("div", {
+    class: "tab-content",
+  });
 
-      //appends the list items to the ul.
-      ul.push(li);
-    }
+  //creates tab-panes for each image,and and appends it to tab content.
+  for (let x = 0; x < recipe.src.length; x++) {
+    const div_options =
+      x == 0
+        ? { class: `tab-pane active tab-${x}`, id: `step-${i}-${x}` }
+        : { class: `tab-pane tab-${x}`, id: `step-${i}-${x}` };
 
-    // recipe_carousels[recipe.name] = {
-    //   content: content,
-    //   indicators: ul,
-    // };
-    recipe_carousels.push({
-      name: recipe.name,
-      content: content,
-      indicators: ul,
+    const new_div = createDomElement("div", div_options);
+    const img = createDomElement("img", {
+      src: `static/src/recipes/${recipe.src[x]}`,
     });
-  }
 
-  return recipe_carousels;
+    const li = createDomElement("li", {
+      class: `item-${x + 1}`,
+      "data-target": `#step-${i}-${x}`,
+      "data-toggle": "tab",
+    });
+
+    $(li).click(() => {
+      $(content).carousel(x);
+    });
+
+    new_div.appendChild(img);
+    tabContent.appendChild(new_div);
+    ul.appendChild(li);
+  }
+  appendMany(innerTabs, [content, tabContent]);
+  return { content: innerTabs, ul };
 };
 
-let nested_carousel = (recipes) => {
+const carousel_fill = (recipes) => {
+  let slideshow = document.getElementById("slideshow");
   for (let i = 0; i < recipes.length; i++) {
-    let recipe = recipes[i];
-    let new_div;
-
-    //create slideshow and indicators for nested carousel.
-    new_div = document.createElement("div");
-    new_div.setAttribute("class", "carousel-item");
-    let carousel = document.createElement("div");
-    carousel.setAttribute("class", "carousel slide");
-    carousel.setAttribute("id", recipe.name + " carousel");
-
-    let slideshow = document.createElement("div");
-    slideshow.setAttribute("class", "carousel-inner");
-    slideshow.setAttribute("id", recipe.name + " slideshow");
-
-    let indicators = document.createElement("ul");
-    indicators.setAttribute("class", "carousel-indicators");
-    indicators.setAttribute("id", recipe.name + " indicators");
-
-    for (let i = 0; i < recipe.indicators.length; i++) {
-      indicators.appendChild(recipe.indicators[i]);
-    }
-
-    for (let i = 0; i < recipe.content.length; i++) {
-      slideshow.appendChild(recipe.content[i]);
-    }
-
-    carousel.appendChild(indicators);
-    carousel.appendChild(slideshow);
-    new_div.appendChild(carousel);
-    new_div.setAttribute("id", recipe.name);
-
-    //append nested carousel to main carousel
-    document.getElementById("slideshow").appendChild(new_div);
+    const recipe = recipes[i];
+    const { content, ul } = create_tabs(recipe, i);
+    const carouselItem =
+      i == 0
+        ? createDomElement("div", {
+            class: "carousel-item active",
+            id: `recipe-item-${i}`,
+          })
+        : createDomElement("div", {
+            class: "carousel-item",
+            id: `recipe-item-${i}`,
+          });
+    appendMany(carouselItem, [content, ul]);
+    slideshow.appendChild(carouselItem);
   }
 };
 
-//sets the active element,or returns the index of active element if no argument is provided.
-let active_element = (element) => {
-  let slideshow = document.getElementById("slideshow").children;
-  if (element) {
-    let name = element.title;
-    for (let slide of slideshow) {
-      if (name === slide.id) {
-        slide.classList.add("active");
-      } else {
-        slide.classList.remove("active");
-      }
-      let carousel = document.getElementById(name + " carousel");
-      let indicators = document.getElementById(name + " indicators");
-
-      $(carousel).carousel("pause");
-      for (let i = 0; i < indicators.children.length; i++) {
-        let child = indicators.children[i];
-        $(child).click(function () {
-          $(carousel).carousel(i);
-        });
-      }
-    }
-  } else {
-    for (let i = 0; i < slideshow.length; i++) {
-      if (slideshow[i].classList.contains("active")) {
-        return i;
-      }
-    }
-  }
-};
-
-export { gallery_fill, create_carousels, nested_carousel, active_element };
+export { gallery_fill, carousel_fill };

@@ -1,46 +1,22 @@
 import { getRecipes } from "./modules/fetch-recipes.js";
-import {
-  gallery_fill,
-  create_carousels,
-  nested_carousel,
-  active_element,
-} from "./modules/new-logic.js";
-
-function main() {
-  page();
-}
+import { gallery_fill, carousel_fill } from "./modules/new-logic.js";
+import { kcalsort } from "./modules/search-helper.js";
 
 let page = async () => {
   let recipe = await getRecipes();
   gallery_fill(recipe);
-  let carousels = create_carousels(recipe);
-  nested_carousel(carousels);
-
+  carousel_fill(recipe);
+  const nodelist = document.querySelectorAll(".recipe");
+  const recipes = document.querySelectorAll(".recipe");
+  kcalsort(recipes, recipe);
   $(".recipe").click(function () {
-    active_element(this);
-    $("#myModal").modal("handleUpdate");
+    const id = parseInt(this.id);
+    $("#myCarousel").carousel(id);
     $("#myModal").modal("show");
+    $("#myModal").modal("handleUpdate");
   });
 
-  let elements = document.getElementsByClassName("recipe");
   let animationTimer = 1000;
-  $("#next").click(() => {
-    $("#myModal").modal("hide");
-    setTimeout(() => {
-      let current = active_element();
-      active_element(elements[current + 1]);
-      $("#myModal").modal("show");
-    }, animationTimer);
-  });
-
-  $("#previous").click(() => {
-    $("#myModal").modal("hide");
-    setTimeout(() => {
-      let current = active_element();
-      active_element(elements[current - 1]);
-      $("#myModal").modal("show");
-    }, animationTimer);
-  });
 
   $("#myModal").on("show.bs.modal", function () {
     $("#myModal").css("opacity", 0);
@@ -56,5 +32,9 @@ let page = async () => {
     }, 1000);
   });
 };
+
+function main() {
+  page();
+}
 
 main();
