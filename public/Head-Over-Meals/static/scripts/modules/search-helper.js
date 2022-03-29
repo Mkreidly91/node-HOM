@@ -12,86 +12,101 @@ let compareString = (a, b) => {
   return 0;
 };
 
-const grab_ids = (nodelist, sortedarray) => {
-  const sortedIds = [];
-  const arr = [];
-  for (let i = 0; i < nodelist.length; i++) {
-    for (let j = 0; j < sortedarray.length; j++) {
-      if (nodelist[i].title == sortedarray[j].name) {
-        for (let i = 0; i < nodelist.length; i++) {
-          nodelist[i].style.order = j + 1;
-        }
-        // sortedIds.push({
-        //   name: nodelist[i].title,
-        //   id: parseInt(nodelist[i].id),
-        //   order: j + 1,
-        // });
-        arr[i] = j + 1;
+//takes in value,and returns a nodelist of elements that contain that value.
+const search_results_nodeList = (value, nodeList) => {
+  let searchResults = new Array();
+  for (let i = 0; i < nodeList.length; i++) {
+    if (nodeList[i].title.toLowerCase().trim().includes(value)) {
+      nodeList[i].style.display = "flex";
+      searchResults.push(nodeList[i]);
+    } else {
+      nodeList[i].style.display = "none";
+    }
+  }
+  return searchResults;
+};
+
+//takes in a nodelist, and returns the corresponding list of objects.
+const get_list = (nodeList, recipes) => {
+  let newList = [];
+  for (let i = 0; i < nodeList.length; i++) {
+    for (let j = 0; j < recipes.length; j++) {
+      if (nodeList[i].title == recipes[j].name) {
+        newList.push(recipes[j]);
       }
     }
   }
-  console.log(arr);
-  return arr;
+  return newList;
+};
+
+//orders the html elements according to the sorting applied,returns an array of ordered ids.
+const order = (nodeList, sortedArray, reverse) => {
+  const sortedNodeList = [];
+  reverse === true ? sortedArray.reverse() : sortedArray;
+  for (let i = 0; i < nodeList.length; i++) {
+    for (let j = 0; j < sortedArray.length; j++) {
+      if (nodeList[i].title == sortedArray[j].name) {
+        nodeList[i].style.order = j + 1;
+        sortedNodeList[j] = parseInt(nodeList[i].id);
+      }
+    }
+  }
+  return sortedNodeList;
 };
 
 //sorts the elements by alphabetical order
-let alphasort = (nodelist, list) => {
+let alphasort = (list) => {
   let sorted = list.sort((a, b) => {
     return compareString(a, b);
   });
-  grab_ids(nodelist, sorted);
 };
 
-let kcalsort = (nodelist, list) => {
+//sorts the elements by kcal
+let kcalsort = (list) => {
   let sorted = list.sort((a, b) => {
     if (a.kcal == b.kcal) {
       return compareString(a, b);
     }
     return a.kcal - b.kcal;
   });
-  grab_ids(nodelist, sorted);
 };
 
-let timesort = (nodelist, list) => {
+//sorts the elements by time
+let timesort = (list) => {
   let sorted = list.sort(function (a, b) {
     if (a.time == b.time) {
       return compareString(a, b);
     }
     return a.time - b.time;
   });
-  grab_ids(nodelist, sorted);
 };
+// value, type, reverse, nodeList, recipesList
+const search_controller = (options) => {
+  const { value, type, reverse, nodeList, recipesList } = options;
+  const resultsNodeList = search_results_nodeList(value, nodeList);
+  const resultsList = get_list(resultsNodeList, recipesList);
 
-let reverse = () => {
-  //   orderedList.reverse();
-  //   recipesSorted.reverse();
-  //   nodelistsort(recipes, orderedList);
-};
+  const noResult = document.getElementById("no-result");
 
-let displayed_elements = (nodelist) => {
-  let searchResults = new Array();
-
-  let x = 0;
-  for (let i = 0; i < nodelist.length; i++) {
-    if (nodelist[i].style.display == "flex") {
-      searchResults.push(nodelist[i]);
-      searchResults[x].style.order = x + 1;
-      x++;
-    }
+  if (resultsNodeList.length == 0) {
+    noResult.style.display = "initial";
+  } else {
+    noResult.style.display = "none";
   }
 
-  return searchResults;
-};
-
-//controls the sorting buttons,by adding and removing a "selected" class.
-let sortListItem = document.getElementsByClassName("sort-list-item");
-let selected = (x) => {
-  sortListItem[x].classList.add("selected");
-  for (let i = 0; i < sortListItem.length; i++) {
-    if (i != x) {
-      sortListItem[i].classList.remove("selected");
-    }
+  if (type == "alpha") {
+    alphasort(resultsList);
   }
+
+  if (type == "kcal") {
+    kcalsort(resultsList);
+  }
+
+  if (type == "time") {
+    timesort(resultsList);
+  }
+
+  return order(resultsNodeList, resultsList, reverse);
 };
 
-export { alphasort, kcalsort, timesort, selected };
+export { search_controller };

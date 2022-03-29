@@ -1,34 +1,37 @@
 import { getRecipes } from "./modules/fetch-recipes.js";
 import { gallery_fill, carousel_fill } from "./modules/new-logic.js";
-
-const animationTimer = 1000;
+import { search_controller } from "./modules/search-helper.js";
+import { clicks, clearButton, modal_animations } from "./modules/clicks.js";
 
 let page = async () => {
-  console.log("ismail made a change");
-  let recipe = await getRecipes();
-  gallery_fill(recipe);
-  carousel_fill(recipe);
-  console.log("mostafa learning git");
-  $(".recipe").click(function () {
-    const id = parseInt(this.id);
-    $("#myCarousel").carousel(id);
-    $("#myModal").modal("show");
-    $("#myModal").modal("handleUpdate");
-  });
+  let recipes = await getRecipes();
+  gallery_fill(recipes);
+  carousel_fill(recipes);
 
-  $("#myModal").on("show.bs.modal", function () {
-    $("#myModal").css("opacity", 0);
-    $("#myModal").animate({ opacity: "1" }, animationTimer);
-  });
+  const recipesNodelist = document.querySelectorAll(".recipe");
+  const noResult = document.getElementById("no-result");
+  const clear = document.getElementById("clear-search");
 
-  $("#myModal").on("hide.bs.modal", function () {
-    $("#myModal").addClass("d-block");
-    $("#myModal").animate({ opacity: "0" }, animationTimer);
-    //after animation is done,remove the display block class, since it was interfering with the custom animation.
-    setTimeout(() => {
-      $("#myModal").removeClass("d-block");
-    }, animationTimer);
-  });
+  let states = {
+    type: "alpha",
+    reverse: false,
+    searchText: "",
+    ids: [],
+    sorting: () => {
+      clearButton(states.searchText);
+
+      states.ids = search_controller({
+        value: states.searchText,
+        type: states.type,
+        reverse: states.reverse,
+        nodeList: recipesNodelist,
+        recipesList: recipes,
+      });
+    },
+  };
+  states.sorting();
+  clicks(states);
+  modal_animations();
 };
 
 function main() {

@@ -36,7 +36,8 @@ time.onclick = () => {
   states.sorting();
 };
 console.log(recipe);
-const states = {
+
+let states = {
   type: "alpha",
   order: "",
   searchText: "",
@@ -68,6 +69,5 @@ const states = {
     }
   },
 };
-
-states.sorting();
+// states.sorting();
 // export { kcalsort };
