@@ -2,6 +2,7 @@ import { getRecipes } from "./modules/fetch-recipes.js";
 import { refreshDom } from "./modules/new-logic.js";
 import { new_search_controller } from "./modules/search-helper.js";
 import { clicks, clearButton, modal_animations } from "./modules/clicks.js";
+import { recipeArraysEqual } from "./modules/helper.js";
 
 let page = async () => {
   let recipes = await getRecipes();
@@ -25,9 +26,15 @@ let page = async () => {
         type: states.type,
         reverse: states.reverse,
       });
-      if (states.results !== results) {
+      const resultsNames = [];
+      results.forEach((element) => {
+        resultsNames.push(element.name);
+      });
+
+      if (!recipeArraysEqual(resultsNames, states.results)) {
         refreshDom(results);
       }
+      console.log(resultsNames);
       states.results = results;
       clicks(states);
     },
