@@ -26,8 +26,6 @@ let clearButton = (value) => {
   }
 };
 const clicks = (states) => {
-  selected(0);
-
   alpha.onclick = () => {
     selected(0);
     states.type = "alpha";
@@ -79,8 +77,6 @@ const clicks = (states) => {
     states.sorting();
   };
 
-  let id;
-
   const position = (option) => {
     const index = (id) => states.ids.indexOf(id);
     let next;
@@ -101,23 +97,10 @@ const clicks = (states) => {
   };
 
   $(".recipe").click(function () {
-    id = parseInt(this.id);
-
+    const id = parseInt(this.id);
     $("#myCarousel").carousel(id);
     $("#myModal").modal("show");
     $("#myModal").modal("handleUpdate");
-  });
-
-  $("#next").click(() => {
-    $("#myCarousel").on("slide.bs.carousel", function (event) {
-      console.log(event.direction);
-      event.direction = "left";
-    });
-    $("#myCarousel").carousel(position("next"));
-  });
-
-  $("#previous").click(() => {
-    $("#myCarousel").carousel(position("previous"));
   });
 };
 

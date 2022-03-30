@@ -1,14 +1,13 @@
 import { getRecipes } from "./modules/fetch-recipes.js";
-import { gallery_fill, carousel_fill } from "./modules/new-logic.js";
-import { search_controller } from "./modules/search-helper.js";
+import { refreshDom } from "./modules/new-logic.js";
+import { new_search_controller } from "./modules/search-helper.js";
 import { clicks, clearButton, modal_animations } from "./modules/clicks.js";
 
 let page = async () => {
   let recipes = await getRecipes();
-  gallery_fill(recipes);
-  carousel_fill(recipes);
+  refreshDom(recipes);
 
-  const recipesNodelist = document.querySelectorAll(".recipe");
+  // const recipesNodelist = document.querySelectorAll(".recipe");
   const noResult = document.getElementById("no-result");
   const clear = document.getElementById("clear-search");
 
@@ -16,21 +15,25 @@ let page = async () => {
     type: "alpha",
     reverse: false,
     searchText: "",
-    ids: [],
+    results: [],
     sorting: () => {
       clearButton(states.searchText);
 
-      states.ids = search_controller({
+      const results = new_search_controller({
         value: states.searchText,
+        recipeList: recipes,
         type: states.type,
         reverse: states.reverse,
-        nodeList: recipesNodelist,
-        recipesList: recipes,
       });
+      if (states.results !== results) {
+        refreshDom(results);
+      }
+      states.results = results;
+      clicks(states);
     },
   };
   states.sorting();
-  clicks(states);
+
   modal_animations();
 };
 

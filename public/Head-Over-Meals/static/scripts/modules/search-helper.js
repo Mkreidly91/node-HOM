@@ -26,6 +26,16 @@ const search_results_nodeList = (value, nodeList) => {
   return searchResults;
 };
 
+const new_search_results_List = (value, recipeList) => {
+  let searchResults = new Array();
+  for (let i = 0; i < recipeList.length; i++) {
+    if (recipeList[i].name.toLowerCase().trim().includes(value)) {
+      searchResults.push(recipeList[i]);
+    }
+  }
+  return searchResults;
+};
+
 //takes in a nodelist, and returns the corresponding list of objects.
 const get_list = (nodeList, recipes) => {
   let newList = [];
@@ -80,9 +90,11 @@ let timesort = (list) => {
     return a.time - b.time;
   });
 };
+
 // value, type, reverse, nodeList, recipesList
 const search_controller = (options) => {
   const { value, type, reverse, nodeList, recipesList } = options;
+
   const resultsNodeList = search_results_nodeList(value, nodeList);
   const resultsList = get_list(resultsNodeList, recipesList);
 
@@ -109,4 +121,33 @@ const search_controller = (options) => {
   return order(resultsNodeList, resultsList, reverse);
 };
 
-export { search_controller };
+const new_search_controller = (options) => {
+  const { value, recipeList, type, reverse } = options;
+  const resultsList = new_search_results_List(value, recipeList);
+
+  const noResult = document.getElementById("no-result");
+
+  if (resultsList.length == 0) {
+    noResult.style.display = "initial";
+  } else {
+    noResult.style.display = "none";
+  }
+
+  if (type == "alpha") {
+    alphasort(resultsList);
+  }
+
+  if (type == "kcal") {
+    kcalsort(resultsList);
+  }
+
+  if (type == "time") {
+    timesort(resultsList);
+  }
+  if (reverse) {
+    resultsList.reverse;
+  }
+
+  return resultsList;
+};
+export { new_search_controller };

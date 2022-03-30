@@ -1,7 +1,8 @@
 import { createDomElement, appendMany, displayTime } from "./helper.js";
+const slideshow = document.getElementById("slideshow");
+const row = document.getElementsByClassName("row")[0];
 
-let gallery_fill = (recipeList) => {
-  let row = document.getElementsByClassName("row");
+const gallery_fill = (recipeList) => {
   for (let i = 0; i < recipeList.length; i++) {
     const col = createDomElement("div", {
       class: "col-1 recipe",
@@ -39,7 +40,7 @@ let gallery_fill = (recipeList) => {
     //append all the child elements to the grid.
     appendMany(recipeGrid, [image, title, kcal, servings, prep]);
     col.appendChild(recipeGrid);
-    row[0].appendChild(col);
+    row.appendChild(col);
   }
 };
 
@@ -102,4 +103,20 @@ const carousel_fill = (recipes) => {
   }
 };
 
-export { gallery_fill, carousel_fill };
+const clearDom = () => {
+  // while (slideshow.firstChild) {
+  //   slideshow.removeChild(slideshow.firstChild);
+  // }
+  // while (row.firstChild) {
+  //   row.removeChild(row.firstChild);
+  // }
+  slideshow.innerHTML = "";
+  row.innerHTML = "";
+};
+
+const refreshDom = (recipeList) => {
+  clearDom();
+  gallery_fill(recipeList);
+  carousel_fill(recipeList);
+};
+export { refreshDom };
