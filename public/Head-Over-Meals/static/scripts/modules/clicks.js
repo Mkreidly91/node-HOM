@@ -25,8 +25,8 @@ let clearButton = (value) => {
     clear.style.display = "initial";
   }
 };
+
 const clicks = (states) => {
-  console.log("i am calllled");
   alpha.onclick = () => {
     selected(0);
     states.type = "alpha";

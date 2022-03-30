@@ -34,11 +34,12 @@ let page = async () => {
       if (!recipeArraysEqual(resultsNames, states.results)) {
         refreshDom(results);
       }
+
       console.log(resultsNames);
       states.results = results;
-      clicks(states);
     },
   };
+  clicks(states);
   states.sorting();
 
   modal_animations();
