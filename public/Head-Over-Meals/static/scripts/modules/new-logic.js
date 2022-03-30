@@ -115,12 +115,10 @@ const clearDom = () => {
 };
 
 const refreshDom = (recipeList) => {
-  console.log('starting refersh dom')
   clearDom();
   gallery_fill(recipeList);
   carousel_fill(recipeList);
   $(".recipe").click(function () {
-    console.log('recipe on click')
     const id = parseInt(this.id);
     $("#myCarousel").carousel(id);
     $("#myModal").modal("show");

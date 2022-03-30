@@ -96,13 +96,6 @@ const clicks = (states) => {
       return previous;
     }
   };
-
-  $(".recipe").click(function () {
-    const id = parseInt(this.id);
-    $("#myCarousel").carousel(id);
-    $("#myModal").modal("show");
-    $("#myModal").modal("handleUpdate");
-  });
 };
 
 const animationTimer = 1000;
