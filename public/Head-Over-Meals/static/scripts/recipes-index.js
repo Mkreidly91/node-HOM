@@ -29,11 +29,10 @@ let page = async () => {
         refreshDom(results);
       }
       states.results = results;
-      clicks(states);
     },
   };
+  clicks(states);
   states.sorting();
-
   modal_animations();
 };
 

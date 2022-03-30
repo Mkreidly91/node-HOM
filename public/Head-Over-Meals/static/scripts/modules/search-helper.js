@@ -145,7 +145,7 @@ const new_search_controller = (options) => {
     timesort(resultsList);
   }
   if (reverse) {
-    resultsList.reverse;
+    resultsList.reverse();
   }
 
   return resultsList;
