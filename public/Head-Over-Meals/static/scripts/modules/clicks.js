@@ -27,6 +27,8 @@ let clearButton = (value) => {
 };
 
 const clicks = (states) => {
+  selected(0);
+
   alpha.onclick = () => {
     selected(0);
     states.type = "alpha";

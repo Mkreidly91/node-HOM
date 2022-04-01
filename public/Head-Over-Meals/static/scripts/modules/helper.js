@@ -31,6 +31,7 @@ const displayTime = (mins) => {
   }
 };
 
+//compare arrays
 const recipeArraysEqual = (a, b) => {
   if (a === b) return true;
   if (a == null || b == null) return false;

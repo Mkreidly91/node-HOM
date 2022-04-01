@@ -104,12 +104,6 @@ const carousel_fill = (recipes) => {
 };
 
 const clearDom = () => {
-  // while (slideshow.firstChild) {
-  //   slideshow.removeChild(slideshow.firstChild);
-  // }
-  // while (row.firstChild) {
-  //   row.removeChild(row.firstChild);
-  // }
   slideshow.innerHTML = "";
   row.innerHTML = "";
 };
