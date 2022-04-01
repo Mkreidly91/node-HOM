@@ -8,17 +8,17 @@ let clear = document.getElementById("clear-search");
 let noResult = document.getElementById("no-result");
 
 //controls the sorting buttons,by adding and removing a "selected" class.
-const selected = (x) => {
-  sortListItem[x].classList.add("selected");
+const highlight_selected = (sortButtonIndex) => {
+  sortListItem[sortButtonIndex].classList.add("selected");
   for (let i = 0; i < sortListItem.length; i++) {
-    if (i != x) {
+    if (i != sortButtonIndex) {
       sortListItem[i].classList.remove("selected");
     }
   }
 };
 
 //controls the clear button display
-let clearButton = (value) => {
+let clearSearchButton = (value) => {
   if (value.length == 0 || value == "") {
     clear.style.display = "none";
   } else {
@@ -27,22 +27,22 @@ let clearButton = (value) => {
 };
 
 const clicks = (states) => {
-  selected(0);
+  highlight_selected(0);
 
   alpha.onclick = () => {
-    selected(0);
+    highlight_selected(0);
     states.type = "alpha";
     states.sorting();
   };
 
   cal.onclick = () => {
-    selected(1);
+    highlight_selected(1);
     states.type = "kcal";
     states.sorting();
   };
 
   time.onclick = () => {
-    selected(2);
+    highlight_selected(2);
     states.type = "time";
     states.sorting();
   };
@@ -79,25 +79,6 @@ const clicks = (states) => {
     states.searchText = "";
     states.sorting();
   };
-
-  const position = (option) => {
-    const index = (id) => states.ids.indexOf(id);
-    let next;
-    let previous;
-    if (option === "next") {
-      index(id) === states.length - 1
-        ? (next = states.ids[0])
-        : (next = states.ids[index(id) + 1]);
-      id = next;
-      return next;
-    } else if (option === "previous") {
-      index(id) === 0
-        ? (previous = states.ids[states.ids.length - 1])
-        : (previous = states.ids[index(id) - 1]);
-      id = previous;
-      return previous;
-    }
-  };
 };
 
 const animationTimer = 1000;
@@ -116,4 +97,4 @@ const modal_animations = () => {
     }, animationTimer);
   });
 };
-export { clicks, clearButton, modal_animations };
+export { clicks, clearSearchButton, modal_animations };
