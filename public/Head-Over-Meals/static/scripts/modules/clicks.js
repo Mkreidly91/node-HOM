@@ -5,7 +5,6 @@ const arrow = document.getElementsByClassName("arrow");
 const sortListItem = document.getElementsByClassName("sort-list-item");
 let searchBar = document.getElementById("search");
 let clear = document.getElementById("clear-search");
-let noResult = document.getElementById("no-result");
 
 //controls the sorting buttons,by adding and removing a "selected" class.
 const highlight_selected = (sortButtonIndex) => {
@@ -25,6 +24,10 @@ let clearSearchButton = (value) => {
     clear.style.display = "initial";
   }
 };
+
+/* modifies the properties of states object from recipes-index.
+   each click of a sorting button changes the states.type property
+   to trigger sorting functions in search_controller in recipes-index.js*/
 
 const clicks = (states) => {
   highlight_selected(0);
@@ -97,4 +100,5 @@ const modal_animations = () => {
     }, animationTimer);
   });
 };
+
 export { clicks, clearSearchButton, modal_animations };

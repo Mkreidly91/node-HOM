@@ -1,20 +1,27 @@
 import { recipeArraysEqual } from "./modules/helper.js";
 import { getRecipes } from "./modules/fetch-recipes.js";
-import { refreshDom } from "./modules/recipes-DOM";
+import { refreshDom } from "./modules/recipes-DOM.js";
 import { search_controller } from "./modules/search-helper.js";
-import { clicks, clearButton, modal_animations } from "./modules/clicks.js";
+import {
+  clicks,
+  clearSearchButton,
+  modal_animations,
+} from "./modules/clicks.js";
 
 let page = async () => {
   let recipes = await getRecipes();
   refreshDom(recipes);
 
+  //states object defines the state of my image gallery
+  //the object properties represent sorting functions which will trigger through search_controller
+  //
   let states = {
     type: "alpha",
     reverse: false,
     searchText: "",
     results: [],
     sorting: () => {
-      clearButton(states.searchText);
+      clearSearchButton(states.searchText);
 
       const results = search_controller({
         value: states.searchText,
