@@ -51,7 +51,7 @@ let timesort = (list) => {
 };
 
 const noResult = document.getElementById("no-result");
-//modifies the results of the search depending on states object properties,and returns the list
+//modifies the results of the search depending on states object properties,and returns the results as a list
 const search_controller = (options) => {
   const { value, recipeList, type, reverse } = options;
   const resultsList = search_results_List(value, recipeList);

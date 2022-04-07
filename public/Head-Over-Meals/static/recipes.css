@@ -29,6 +29,7 @@
 
   /*modal*/
   --close: clamp(20px, 8vw, 50px);
+  --image-transition-timer: 0.5s;
 }
 body {
   background-color: #e9e7e7;
@@ -401,6 +402,25 @@ input[type="search"]::-webkit-search-cancel-button {
   height: 100%;
 }
 
+.imageContainer {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+}
+.item {
+  opacity: 0;
+  grid-area: 1/1;
+}
+
+.activated {
+  opacity: 1;
+  transition: opacity var(--image-transition-timer) linear;
+}
+.transition {
+  opacity: 0;
+  transition: opacity var(--image-transition-timer) linear;
+}
+
 #indicators li {
   background-color: var(--leaf);
 }
@@ -420,7 +440,8 @@ footer {
   margin-top: 2rem;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
   background-color: transparent !important;
 }
 .nav-item {
