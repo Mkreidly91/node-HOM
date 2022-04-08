@@ -410,19 +410,19 @@ input[type="search"]::-webkit-search-cancel-button {
 .item {
   opacity: 0;
   grid-area: 1/1;
+  transition: opacity var(--image-transition-timer) linear;
 }
 
-.activated {
+.activeImg {
   opacity: 1;
-  transition: opacity var(--image-transition-timer) linear;
-}
-.transition {
-  opacity: 0;
-  transition: opacity var(--image-transition-timer) linear;
 }
 
-#indicators li {
-  background-color: var(--leaf);
+.carousel-indicators li {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  background-color: var(--hom-orange);
+  border: 1px solid black;
 }
 
 #previous {

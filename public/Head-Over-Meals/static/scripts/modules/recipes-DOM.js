@@ -1,5 +1,5 @@
 import { createDomElement, appendMany, displayTime } from "./helper.js";
-import { selected } from "./modal-helper.js";
+import { selected_image } from "./modal-helper.js";
 const slideshow = document.getElementById("slideshow");
 const row = document.getElementsByClassName("row")[0];
 const closeButton = document.getElementsByClassName("close")[0];
@@ -48,7 +48,7 @@ const gallery_fill = (recipeList) => {
 
 const create_tabs = (recipe, index) => {
   const ul = createDomElement("ul", {
-    id: "indicator-" + index,
+    id: "indicators" + index,
     class: "carousel-indicators",
   });
   const content = createDomElement("div", {
@@ -58,7 +58,7 @@ const create_tabs = (recipe, index) => {
 
   for (let x = 0; x < recipe.src.length; x++) {
     const img = createDomElement("img", {
-      class: `item ${x === 0 ? "activated" : ""}`,
+      class: `item ${x === 0 ? "activeImg" : ""}`,
       src: "static/src/recipes/" + recipe.src[x],
     });
     const li = createDomElement("li", {
@@ -71,7 +71,7 @@ const create_tabs = (recipe, index) => {
   const buttons = ul.childNodes;
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].onclick = () => {
-      selected(content, i);
+      selected_image(content, ul, i);
     };
   }
 
@@ -104,12 +104,14 @@ const refreshDom = (recipeList) => {
 
   $(".recipe").click(function () {
     const id = parseInt(this.id);
-    const elem = document.getElementById(`imageContainer${id}`);
+    const imageContainer = document.getElementById(`imageContainer${id}`);
+    const ul = document.getElementById(`indicators${id}`);
+
     $("#myCarousel").carousel(id);
     $("#myModal").modal("show");
     $("#myModal").modal("handleUpdate");
     $("#myModal").on("hide.bs.modal", function () {
-      selected(elem, 0);
+      selected_image(imageContainer, ul, 0);
     });
   });
 };

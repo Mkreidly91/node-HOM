@@ -330,6 +330,7 @@ path {
     width: inherit;
     padding: 0;
     font-size: var(--navbar-mobile-font);
+    opacity: 0;
   }
   .nav-item {
     transform: scale(0);
