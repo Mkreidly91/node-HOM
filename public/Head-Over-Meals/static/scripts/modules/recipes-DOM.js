@@ -71,7 +71,11 @@ const create_tabs = (recipe, index) => {
   const buttons = ul.childNodes;
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].onclick = () => {
-      selected_image(content, ul, i);
+      selected_image({
+        content: content,
+        ul: ul,
+        index: i,
+      });
     };
   }
 
@@ -111,7 +115,11 @@ const refreshDom = (recipeList) => {
     $("#myModal").modal("show");
     $("#myModal").modal("handleUpdate");
     $("#myModal").on("hide.bs.modal", function () {
-      selected_image(imageContainer, ul, 0);
+      selected_image({
+        content: imageContainer,
+        ul: ul,
+        index: 0,
+      });
     });
   });
 };

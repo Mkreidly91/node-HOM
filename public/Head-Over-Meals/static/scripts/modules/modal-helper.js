@@ -1,4 +1,5 @@
-const selected_image = (content, ul, index) => {
+const selected_image = (options) => {
+  const { content, ul, index } = options;
   const images = content.childNodes;
   const listItems = ul.childNodes;
   for (let i = 0; i < images.length; i++) {
