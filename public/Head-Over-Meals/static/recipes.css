@@ -29,6 +29,7 @@
 
   /*modal*/
   --close: clamp(20px, 8vw, 50px);
+  --image-transition-timer: 0.5s;
 }
 body {
   background-color: #e9e7e7;
@@ -248,7 +249,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
   font-family: "CustomFont";
 
-  padding: 10px;
+  padding-bottom: 10px;
   background-color: white;
 }
 
@@ -258,7 +259,7 @@ input[type="search"]::-webkit-search-cancel-button {
   width: 100%;
   height: 100%;
 
-  border-radius: 25px;
+  border-radius: 25px 25px 0 0;
 }
 .recipe-grid h1 {
   grid-area: title;
@@ -401,8 +402,27 @@ input[type="search"]::-webkit-search-cancel-button {
   height: 100%;
 }
 
-#indicators li {
-  background-color: var(--leaf);
+.imageContainer {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+}
+.item {
+  opacity: 0;
+  grid-area: 1/1;
+  transition: opacity var(--image-transition-timer) linear;
+}
+
+.activeImg {
+  opacity: 1;
+}
+
+.carousel-indicators li {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  background-color: var(--hom-orange);
+  border: 1px solid black;
 }
 
 #previous {
@@ -420,7 +440,8 @@ footer {
   margin-top: 2rem;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
   background-color: transparent !important;
 }
 .nav-item {

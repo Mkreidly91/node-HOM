@@ -1,4 +1,3 @@
-//
 $(document).on("submit", "#consultation-form", function (e) {
   //preventDefault prevents the page from reloading on submit,as in prevents the submit event defualt behaviour.
   e.preventDefault();
@@ -32,7 +31,7 @@ $(document).on("submit", "#consultation-form", function (e) {
           emailDiv.children[0].style.border = "1px solid red";
           emailDiv.children[0].style.color = "red";
         } else {
-        /*else highlight border and text-color in green, then display "thanks message"
+          /*else highlight border and text-color in green, then display "thanks message"
                             and clear the form mid animation for a smooth transition.*/
           let footer = document.getElementsByTagName("footer")[0];
           emailDiv.children[0].style.border = "1px solid green";
