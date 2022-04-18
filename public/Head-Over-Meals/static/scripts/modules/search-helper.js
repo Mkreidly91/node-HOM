@@ -12,86 +12,71 @@ let compareString = (a, b) => {
   return 0;
 };
 
-const grab_ids = (nodelist, sortedarray) => {
-  const sortedIds = [];
-  const arr = [];
-  for (let i = 0; i < nodelist.length; i++) {
-    for (let j = 0; j < sortedarray.length; j++) {
-      if (nodelist[i].title == sortedarray[j].name) {
-        for (let i = 0; i < nodelist.length; i++) {
-          nodelist[i].style.order = j + 1;
-        }
-        // sortedIds.push({
-        //   name: nodelist[i].title,
-        //   id: parseInt(nodelist[i].id),
-        //   order: j + 1,
-        // });
-        arr[i] = j + 1;
-      }
+//takes in (search text,recipe list), and returns a new list of items that include the value of search text
+const search_results_List = (value, recipeList) => {
+  const searchResults = new Array();
+  for (let i = 0; i < recipeList.length; i++) {
+    if (recipeList[i].name.toLowerCase().trim().includes(value)) {
+      searchResults.push(recipeList[i]);
     }
   }
-  console.log(arr);
-  return arr;
+  return searchResults;
 };
 
 //sorts the elements by alphabetical order
-let alphasort = (nodelist, list) => {
+let alphasort = (list) => {
   let sorted = list.sort((a, b) => {
     return compareString(a, b);
   });
-  grab_ids(nodelist, sorted);
 };
 
-let kcalsort = (nodelist, list) => {
+//sorts the elements by kcal
+let kcalsort = (list) => {
   let sorted = list.sort((a, b) => {
     if (a.kcal == b.kcal) {
       return compareString(a, b);
     }
     return a.kcal - b.kcal;
   });
-  grab_ids(nodelist, sorted);
 };
 
-let timesort = (nodelist, list) => {
+//sorts the elements by time
+let timesort = (list) => {
   let sorted = list.sort(function (a, b) {
     if (a.time == b.time) {
       return compareString(a, b);
     }
     return a.time - b.time;
   });
-  grab_ids(nodelist, sorted);
 };
 
-let reverse = () => {
-  //   orderedList.reverse();
-  //   recipesSorted.reverse();
-  //   nodelistsort(recipes, orderedList);
-};
+const noResult = document.getElementById("no-result");
+//modifies the results of the search depending on states object properties,and returns the results as a list
+const search_controller = (options) => {
+  const { value, recipeList, type, reverse } = options;
+  const resultsList = search_results_List(value, recipeList);
 
-let displayed_elements = (nodelist) => {
-  let searchResults = new Array();
-
-  let x = 0;
-  for (let i = 0; i < nodelist.length; i++) {
-    if (nodelist[i].style.display == "flex") {
-      searchResults.push(nodelist[i]);
-      searchResults[x].style.order = x + 1;
-      x++;
-    }
+  if (resultsList.length == 0) {
+    noResult.style.display = "initial";
+  } else {
+    noResult.style.display = "none";
   }
 
-  return searchResults;
-};
-
-//controls the sorting buttons,by adding and removing a "selected" class.
-let sortListItem = document.getElementsByClassName("sort-list-item");
-let selected = (x) => {
-  sortListItem[x].classList.add("selected");
-  for (let i = 0; i < sortListItem.length; i++) {
-    if (i != x) {
-      sortListItem[i].classList.remove("selected");
-    }
+  if (type == "alpha") {
+    alphasort(resultsList);
   }
-};
 
-export { alphasort, kcalsort, timesort, selected };
+  if (type == "kcal") {
+    kcalsort(resultsList);
+  }
+
+  if (type == "time") {
+    timesort(resultsList);
+  }
+  if (reverse) {
+    resultsList.reverse();
+  }
+
+  return resultsList;
+};
+export { search_controller };

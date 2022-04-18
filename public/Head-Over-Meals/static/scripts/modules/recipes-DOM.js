@@ -1,7 +1,10 @@
 import { createDomElement, appendMany, displayTime } from "./helper.js";
+import { selected_image } from "./modal-helper.js";
+const slideshow = document.getElementById("slideshow");
+const row = document.getElementsByClassName("row")[0];
+const closeButton = document.getElementsByClassName("close")[0];
 
-let gallery_fill = (recipeList) => {
-  let row = document.getElementsByClassName("row");
+const gallery_fill = (recipeList) => {
   for (let i = 0; i < recipeList.length; i++) {
     const col = createDomElement("div", {
       class: "col-1 recipe",
@@ -39,53 +42,44 @@ let gallery_fill = (recipeList) => {
     //append all the child elements to the grid.
     appendMany(recipeGrid, [image, title, kcal, servings, prep]);
     col.appendChild(recipeGrid);
-    row[0].appendChild(col);
+    row.appendChild(col);
   }
 };
 
 const create_tabs = (recipe, index) => {
   const ul = createDomElement("ul", {
-    id: "indicator-" + index,
-    role: "tablist",
-    class: "carousel-indicators nav nav-pills",
+    id: "indicators" + index,
+    class: "carousel-indicators",
   });
   const content = createDomElement("div", {
-    id: "imageTabs" + index,
+    id: "imageContainer" + index,
+    class: "imageContainer",
   });
-  const innerCarousel = createDomElement("div", {
-    class: "inner-tabs",
-    id: "inner-" + index,
-  });
-  const tabContent = createDomElement("div", {
-    class: "tab-content",
-  });
+
   for (let x = 0; x < recipe.src.length; x++) {
-    const tabPane = createDomElement("div", {
-      class: `tab-pane tab-pane-${x} ${x === 0 ? "active" : ""}`,
-      id: "step" + index + x,
-    });
     const img = createDomElement("img", {
+      class: `item ${x === 0 ? "activeImg" : ""}`,
       src: "static/src/recipes/" + recipe.src[x],
     });
     const li = createDomElement("li", {
-      class: `nav-item ${x === 0 ? "active" : ""}`,
+      class: `${x === 0 ? "active" : ""}`,
     });
-    //creates image element inside the carousel-item,then sets the src,and appends it to div.
-    tabPane.appendChild(img);
-    tabContent.appendChild(tabPane);
-    //appends the list items to the ul.
-    li.appendChild(
-      createDomElement("div", {
-        class: "nav-link",
-        href: "#step" + index + x,
-        "data-toggle": "pill",
-      })
-    );
+
+    content.appendChild(img);
     ul.appendChild(li);
   }
-  innerCarousel.appendChild(tabContent);
-  innerCarousel.appendChild(content);
-  return { content: innerCarousel, ul };
+  const buttons = ul.childNodes;
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].onclick = () => {
+      selected_image({
+        content: content,
+        ul: ul,
+        index: i,
+      });
+    };
+  }
+
+  return { content: content, ul };
 };
 
 const carousel_fill = (recipes) => {
@@ -102,4 +96,32 @@ const carousel_fill = (recipes) => {
   }
 };
 
-export { gallery_fill, carousel_fill };
+const clearDom = () => {
+  slideshow.innerHTML = "";
+  row.innerHTML = "";
+};
+
+const refreshDom = (recipeList) => {
+  clearDom();
+  gallery_fill(recipeList);
+  carousel_fill(recipeList);
+
+  $(".recipe").click(function () {
+    const id = parseInt(this.id);
+    const imageContainer = document.getElementById(`imageContainer${id}`);
+    const ul = document.getElementById(`indicators${id}`);
+
+    $("#myCarousel").carousel(id);
+    $("#myModal").modal("show");
+    $("#myModal").modal("handleUpdate");
+    $("#myModal").on("hide.bs.modal", function () {
+      selected_image({
+        content: imageContainer,
+        ul: ul,
+        index: 0,
+      });
+    });
+  });
+};
+
+export { refreshDom };
