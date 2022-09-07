@@ -1,0 +1,449 @@
+:root {
+  --green: #b5e9d2;
+
+  /*color control panel*/
+  --image-gallery-gradient: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(181, 233, 208, 1) 0%,
+    rgba(181, 221, 226, 1) 100%
+  );
+
+  /* FONTS / FONT-SIZES */
+
+  /*IMAGE GALLERY*/
+
+  /*Search/sort*/
+  --searchbar-fontsize: clamp(1rem, 2vw, 2rem);
+  --icon-size: clamp(20px, 3vw, 40px);
+
+  /* Recipes */
+  /* name */
+  --name-font: "Dancing Script", cursive;
+  --name-fontsize: clamp(2rem, 2vw, 3rem);
+
+  /*info*/
+  --info-font: "comfortaa", cursive;
+  --info-fontsize: clamp(1rem, 1vw, 1.5rem);
+  --no-result-font: clamp(1rem, 5vw, 2rem);
+
+  /*modal*/
+  --close: clamp(20px, 8vw, 50px);
+  --image-transition-timer: 0.5s;
+}
+body {
+  background-color: #e9e7e7;
+}
+
+/* animations for modal loading*/
+#modal-loader {
+  position: fixed;
+  display: none;
+
+  width: 100%;
+  height: 100%;
+
+  align-items: center;
+  justify-content: center;
+
+  z-index: 1051;
+}
+
+@keyframes modal-load {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+#c1,
+#c2,
+#c3 {
+  fill: red;
+  transform: scale(0);
+  transform-origin: 50% 50%;
+}
+
+#c1 {
+  animation: modal-load 1s linear infinite alternate;
+}
+
+#c2 {
+  margin-left: 10px;
+  animation: modal-load 1s linear 0.5s infinite alternate;
+}
+
+#c3 {
+  margin-left: 10px;
+  animation: modal-load 1s linear 1s infinite alternate;
+}
+
+/*SORT-GROUP*/
+.sort-list-div {
+  display: grid;
+  grid-template-columns: 60% auto;
+  align-items: center;
+
+  margin-bottom: 5%;
+}
+/*MOBILE MEDIA QUERY for sort-list and searchbar*/
+@media (max-width: 767px) {
+  .sort-list-div {
+    grid-template-columns: auto;
+    align-content: center;
+  }
+
+  #search-div {
+    justify-content: center;
+    margin-bottom: 4%;
+  }
+}
+/* Search Bar */
+#search-div {
+  position: relative;
+  display: flex;
+  justify-self: center;
+  align-items: center;
+
+  width: 80%;
+
+  filter: drop-shadow(-1px 1px 2px #00000059);
+}
+
+.sort-list-div input {
+  width: 100%;
+  height: 100%;
+
+  border: none;
+  border-radius: 25px;
+
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-size: var(--searchbar-fontsize);
+
+  padding-left: 35px;
+  padding-right: 35px;
+}
+
+input::placeholder {
+  padding: 1rem;
+  color: darkgrey;
+}
+
+input:focus::placeholder {
+  color: transparent;
+}
+
+input:focus {
+  outline: none;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  display: none;
+}
+
+/* clear search button and no result found*/
+#clear-search {
+  display: none;
+  position: absolute;
+  width: 15px;
+  right: 20px;
+
+  margin-left: 1px;
+}
+
+#no-result {
+  display: none;
+  margin: 20%;
+  text-align: center;
+  font-size: var(--no-result-font);
+}
+
+.sort-list {
+  display: flex;
+  height: 100%;
+  justify-content: space-evenly;
+
+  list-style-type: none;
+
+  margin-bottom: 0;
+  padding: 0;
+}
+
+/*sorting buttons*/
+.disable-select {
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+.sort-list-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: inherit;
+
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 10%;
+}
+
+.selected {
+  background-color: #eb7a69;
+}
+
+.arrow-rect {
+  transition: width 0.5s;
+}
+
+#alphabet {
+  font-size: 30px;
+  font-size: var(--icon-size);
+}
+
+.arrow,
+.sort-svg {
+  width: 30px;
+  width: var(--icon-size);
+}
+
+/*IMAGE-GALLERY SECTION*/
+#image-gallery {
+  position: relative;
+  min-height: 100vh;
+  border-radius: 20px;
+
+  margin: 10px;
+  padding: 20px;
+}
+
+.row {
+  min-height: 80%;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.recipe {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  min-width: max(350px, 25vw);
+  min-height: 21.875rem;
+  margin-bottom: 20px;
+}
+
+.recipe-grid {
+  display: grid;
+  grid-template-areas: "img" "title" "kcal" "yield" "time";
+  grid-template-columns: auto;
+  grid-template-rows: auto auto auto;
+
+  border-radius: 25px;
+  box-shadow: -2px 2px 2px #00000059;
+
+  font-family: "CustomFont";
+
+  padding-bottom: 10px;
+  background-color: white;
+}
+
+.recipe-grid img {
+  grid-area: img;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 25px 25px 0 0;
+}
+.recipe-grid h1 {
+  grid-area: title;
+
+  font-family: var(--name-font);
+  font-size: var(--name-fontsize);
+
+  text-align: center;
+  border-bottom: 1px solid black;
+
+  margin: 0.5rem;
+  padding-bottom: 5px;
+}
+
+.recipe-grid p:nth-of-type(1) {
+  grid-area: kcal;
+}
+
+.recipe-grid p:nth-of-type(2) {
+  grid-area: yield;
+}
+
+.recipe-grid p:nth-of-type(3) {
+  grid-area: time;
+}
+
+.recipe-grid p {
+  font-family: var(--info-font);
+  font-size: var(--info-fontsize);
+  font-weight: 200;
+
+  margin-bottom: 0;
+  padding-left: 10%;
+}
+
+.recipe-grid p:nth-of-type(1) {
+  font-weight: 700;
+  color: var(--hom-orange);
+}
+
+@media (max-width: 480px) {
+  #image-gallery {
+    margin: 10px;
+    padding: 5px;
+  }
+
+  .recipe {
+    min-width: 100%;
+  }
+
+  .recipe-grid {
+    padding: 0;
+    grid-gap: 0px;
+    grid-template-areas:
+      "title title"
+      "img kcal "
+      "img yield "
+      "img time ";
+    grid-template-columns: 60% 40%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .recipe-grid img {
+    grid-area: img;
+    padding-left: 5px;
+    width: 100%;
+    height: auto;
+  }
+
+  .recipe-grid h1 {
+    align-self: end;
+  }
+
+  .recipe-grid p:nth-of-type(1) {
+    align-self: end;
+  }
+
+  .recipe-grid p:nth-of-type(3) {
+    align-self: start;
+  }
+}
+
+/* Modal-Carousel-Section */
+.modal-content {
+  background-color: var(--green);
+}
+
+#carousel-container,
+.modal-header {
+  padding: 0px !important;
+}
+
+#slideshow,
+.modal-content,
+.modal-body img {
+  border-radius: 5%;
+}
+
+.modal-header {
+  border: none;
+}
+
+.modal-header h4 {
+  display: none;
+}
+
+.close {
+  position: absolute;
+  top: 3%;
+  right: 5%;
+
+  font-size: var(--close);
+
+  opacity: 1;
+  color: white;
+  z-index: 1051;
+}
+
+.close::active {
+  outline: none;
+}
+
+.modal-body {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+
+  padding: 10px;
+  padding-bottom: 0;
+}
+
+.modal-dialog {
+  min-width: 40vw;
+}
+
+.modal-body img {
+  width: 100%;
+  height: 100%;
+}
+
+.imageContainer {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+}
+.item {
+  opacity: 0;
+  grid-area: 1/1;
+  transition: opacity var(--image-transition-timer) linear;
+}
+
+.activeImg {
+  opacity: 1;
+}
+
+.carousel-indicators li {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  background-color: var(--hom-orange);
+  border: 1px solid black;
+}
+
+#previous {
+  margin-right: auto;
+}
+
+.modal-button {
+  width: max(30px, min(50px, 8vw));
+}
+.modal-footer {
+  border-top: 1px solid var(--green);
+}
+
+footer {
+  margin-top: 2rem;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background-color: transparent !important;
+}
+.nav-item {
+  transform: scale(1) !important;
+}

@@ -1,0 +1,26 @@
+extends template
+
+block head
+  link(rel='stylesheet' href='/static/index.css')
+
+block main
+  #background
+  #clinic-text
+    p Head Over Meals is now officially a clinic!
+  #clinic-images
+    #image-1
+    #image-2
+  #consultation-container
+    p Request an online consultation
+    form#consultation-form(action='/' method='POST')
+      .input-field
+        input#name(type='text' name='name' placeholder='First name' required='')
+      .input-field
+        input#lastname(type='text' name='lastname' placeholder='Last name' required='')
+      #email-field.input-field.invalid(data-error='')
+        input#email(type='email' name='email' placeholder='Email address' required='')
+    button#form-submit(form='consultation-form' type='submit') Request
+    .thanks
+      p Thank you!
+  script(src='/static/scripts/consultation-form.js')
+  

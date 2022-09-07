@@ -1,0 +1,118 @@
+doctype html
+head
+  meta(charset='utf-8')
+  // <meta name="viewport" content="initial-scale=1, width=device-width">
+  meta(name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1')
+  // Google Fonts
+  // Poppins
+  link(rel='preconnect' href='https://fonts.googleapis.com')
+  link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
+  link(href='https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500&display=swap' rel='stylesheet')
+  // Dancing Script font, used for recipe names
+  link(rel='preconnect' href='https://fonts.googleapis.com')
+  link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
+  link(href='https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;700&display=swap' rel='stylesheet')
+  // Ephesis
+  link(rel='preconnect' href='https://fonts.googleapis.com')
+  link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
+  link(href='https://fonts.googleapis.com/css2?family=Ephesis&display=swap' rel='stylesheet')
+  // Comfortaa
+  link(rel='preconnect' href='https://fonts.googleapis.com')
+  link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
+  link(href='https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;700&display=swap' rel='stylesheet')
+  // CSS SCRIPTS
+  link(rel='stylesheet' href='/static/template.css')
+  // jQuery library
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+  // Latest compiled and minified CSS
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
+  // Popper JS
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js')
+  // Latest compiled JavaScript
+  script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js')
+block head
+
+.main-content
+  .not-footer
+    #preloader
+      div
+    #modal-loader
+      svg(width='29' height='29' viewbox='0 0 29 29' fill='none' xmlns='http://www.w3.org/2000/svg')
+        circle#c1(cx='14.5' cy='14.5' r='14.5' fill='white')
+      svg(width='29' height='29' viewbox='0 0 29 29' fill='none' xmlns='http://www.w3.org/2000/svg')
+        circle#c2(cx='14.5' cy='14.5' r='14.5' fill='white')
+      svg(width='29' height='29' viewbox='0 0 29 29' fill='none' xmlns='http://www.w3.org/2000/svg')
+        circle#c3(cx='14.5' cy='14.5' r='14.5' fill='white')
+    .nav-bar
+      svg#desktop-svg(width='1440' height='154' viewbox='0 0 1440 154' fill='none' preserveaspectratio='none')
+        path(d='M1440 0H0V154C29.8177 104.5 277.02 153.105 1440 153.105V0Z' fill='#B5E9D2')
+      svg#navbar-svg(width='1440' height='154' viewbox='0 0 1440 154' fill='none' preserveaspectratio='none')
+        path#navbar-curve(d='M1440 0H0V154C29.8177 104.5 277.02 153.105 1440 153.105V0Z' fill='#B5E9D2')
+      nav#nav-window
+        ul#nav-list
+          li.nav-item
+            a(href='/') Home
+          li.nav-item
+            a(href='/Recipes') Recipes
+          li.nav-item
+            a(href='/aboutme') About us
+          li#instagram.nav-item
+            a(href='https://www.instagram.com/head.over.meals.lb/?hl=en' target='_blank')
+              svg#instagram-svg(width='38' height='38' viewbox='0 0 38 38' fill='none')
+                rect(x='-0.498821' y='-0.50105' width='36.9154' height='36.9246' rx='5.5' transform='matrix(0.999998 0.0021019 -0.00235619 0.999997 1.0828 1.00105)' stroke='black')
+                path(d='M19.1219 27.9948C23.9498 27.9948 27.8591 24.0616 27.8591 19.2152C27.8591 14.3687 23.9498 10.4355 19.1219 10.4355C14.2941 10.4355 10.3848 14.3687 10.3848 19.2152C10.3848 24.0616 14.2941 27.9948 19.1219 27.9948Z' stroke='black')
+                ellipse(cx='29.6507' cy='8.13237' rx='2.29179' ry='2.1646' fill='black')
+      svg.navbar-button.off(viewbox='0 0 55 50' fill='none' xmlns='http://www.w3.org/2000/svg')
+        rect(x='0.5' y='0.5' width='54' height='49' rx='11.5' stroke='black')
+        path#upper-line(d='M43 15.0002C42.5 15.0005 12 15 12 15C11.5 14.9998 10 15.5 10 17.5C10 19.5 12 20 12 20L43 20.0002C43 20.0002 45 19.5004 45 17.5002C45 15.5001 43.5 15 43 15.0002Z' fill='black')
+        path#lower-line(d='M43 29.0002C42.5 29.0005 12 29 12 29C11.5 28.9998 10 29.5 10 31.5C10 33.5 12 34 12 34L43 34.0002C43 34.0002 45 33.5004 45 31.5002C45 29.5001 43.5 29 43 29.0002Z' fill='black')
+block main
+
+block footer 
+  footer
+    .footer-container
+      #logo
+      #footer-instagram
+        a(href='https://www.instagram.com/head.over.meals.lb/?hl=en' target='_blank') Follow us on instagram
+        // insta
+        a(href='https://www.instagram.com/head.over.meals.lb/?hl=en' target='_blank')
+          svg.contact-item(width='147' height='147' viewbox='0 0 147 147' fill='none')
+            rect(x='-2.4941' y='-2.50525' width='140.586' height='140.621' rx='22.5' transform='matrix(0.999998 0.0021019 -0.00235619 0.999997 5.80757 5.64928)' stroke='black' stroke-width='5')
+            path(d='M73.9091 108.166C92.4761 108.166 107.506 93.0405 107.506 74.4092C107.506 55.778 92.4761 40.6523 73.9091 40.6523C55.3421 40.6523 40.3125 55.778 40.3125 74.4092C40.3125 93.0405 55.3421 108.166 73.9091 108.166Z' stroke='black' stroke-width='5')
+            ellipse(cx='113.658' cy='32.5701' rx='8.65188' ry='8.1717' fill='black')
+      #headers
+        h1 Kamar Kreidly
+        h2 Licensed Dietitian
+      .left
+        h1 Passing By?
+        p Feel free to visit my clinic
+        #location
+          a(href='https://goo.gl/maps/qAiABwoGP2A6mwa57' target='_blank')
+            svg#location-svg(width='67' height='107' viewbox='0 0 67 107' fill='none' xmlns='http://www.w3.org/2000/svg')
+              path(d='M33.5759 0H33.4236C14.9935 0 0 14.9665 0 33.3624C0 45.421 5.49974 61.3353 16.3464 80.6642C24.3881 94.9939 32.5425 105.969 32.6241 106.078C32.8511 106.383 33.2089 106.562 33.5879 106.562C33.5987 106.562 33.6097 106.562 33.6205 106.561C34.0116 106.551 34.3726 106.351 34.5896 106.025C34.67 105.904 42.7663 93.6953 50.7533 78.7632C61.5338 58.609 67 43.3336 67 33.3624C66.9992 14.9662 52.0055 0 33.5759 0ZM49.0038 34.1777C49.0038 42.7144 42.0487 49.659 33.4995 49.659C24.9505 49.659 17.9954 42.7142 17.9954 34.1777C17.9954 25.6413 24.9505 18.6964 33.4995 18.6964C42.0487 18.6964 49.0038 25.6413 49.0038 34.1777Z' fill='black')
+          p
+            | Beirut, Corniche El Mazraa 
+            br
+            |               Saeb Salam street
+            br
+            |               Khater Center, 2nd floor
+      .right
+        h1 Contact Us
+        p Kamar@headovermeals.clinic
+        #phone
+          // whatsapp
+          a#whatsapp(href='https://wa.me/+96181784917' target='_blank')
+            svg.contact-item(width='170' height='170' viewbox='0 0 170 170' fill='none')
+              path(d='M125.822 97.6165C125.491 97.4577 113.106 91.359 110.906 90.567C110.007 90.2443 109.045 89.9294 108.021 89.9294C106.348 89.9294 104.944 90.7628 103.849 92.3998C102.612 94.2388 98.8671 98.6165 97.7099 99.9243C97.5588 100.097 97.3525 100.303 97.2289 100.303C97.1181 100.303 95.2014 99.5139 94.6211 99.2619C81.3356 93.4908 71.2514 79.6129 69.8686 77.2726C69.6711 76.9362 69.6629 76.7834 69.6612 76.7834C69.7097 76.6053 70.1565 76.1574 70.3871 75.9263C71.0616 75.2589 71.7925 74.3791 72.4996 73.5281C72.8344 73.1249 73.1697 72.7211 73.499 72.3406C74.5249 71.147 74.9816 70.2203 75.5111 69.147L75.7885 68.5894C77.0814 66.0207 75.9772 63.8531 75.6203 63.1532C75.3274 62.5674 70.098 49.9465 69.5421 48.6205C68.2051 45.4209 66.4384 43.9312 63.9834 43.9312C63.7556 43.9312 63.9834 43.9312 63.0281 43.9714C61.8648 44.0205 55.5301 44.8545 52.7293 46.62C49.7591 48.4926 44.7344 54.4616 44.7344 64.959C44.7344 74.4067 50.7299 83.3272 53.304 86.7198C53.368 86.8053 53.4855 86.9791 53.6559 87.2284C63.514 101.625 75.8034 112.295 88.2616 117.272C100.255 122.062 105.935 122.616 109.164 122.616C109.164 122.616 109.164 122.616 109.164 122.616C110.521 122.616 111.607 122.51 112.565 122.415L113.173 122.357C117.316 121.99 126.422 117.272 128.493 111.517C130.124 106.983 130.554 102.03 129.469 100.233C128.725 99.0103 127.444 98.3953 125.822 97.6165Z' fill='black')
+              path(d='M86.5678 0C40.5586 0 3.12724 37.15 3.12724 82.8135C3.12724 97.5827 7.07975 112.04 14.5672 124.693L0.235944 166.967C-0.0310128 167.755 0.16755 168.627 0.750553 169.22C1.1714 169.65 1.74227 169.882 2.32527 169.882C2.54865 169.882 2.77369 169.848 2.99321 169.778L47.0742 155.77C59.1369 162.215 72.7705 165.618 86.5684 165.618C132.573 165.618 170.001 128.472 170.001 82.8135C170.001 37.15 132.573 0 86.5678 0ZM86.5678 148.367C73.5846 148.367 61.0095 144.618 50.1999 137.525C49.8364 137.286 49.4145 137.164 48.9898 137.164C48.7653 137.164 48.5403 137.198 48.3213 137.268L26.2394 144.287L33.3678 123.256C33.5984 122.576 33.4831 121.825 33.0584 121.245C24.8269 109.997 20.4756 96.7085 20.4756 82.8135C20.4756 46.6623 50.1244 17.2507 86.5673 17.2507C123.006 17.2507 152.651 46.6623 152.651 82.8135C152.652 118.96 123.007 148.367 86.5678 148.367Z' fill='black')
+          // phone
+          a(href='tel:+96181784917')
+            svg#phone-svg(width='68' height='68' viewbox='0 0 68 68' fill='none' xmlns='http://www.w3.org/2000/svg')
+              path(d='M25.8764 55.364C-1.62129 31.864 -7.61922 7.36399 9.87961 0.363987C12.4584 -1.64842 17.4883 5.00598 24.3809 12.364C24.9772 15.5435 21.1526 18.413 16.8809 22.864C14.8809 30.364 30.8809 46.864 42.8809 51.364C49.7779 45.6149 53.13 41.6045 55.3809 43.364C68.2033 58.1201 70.2562 53.2528 62.8809 62.364C55.5055 71.4752 44.3809 68.864 25.8764 55.364Z' fill='black')
+          p +961 81 784 917
+  script.
+    var preloader = document.getElementById("preloader");
+    window.addEventListener("load", function() {
+    preloader.style.display = "none";
+    });
+  script(src='/static/scripts/navbar.js')

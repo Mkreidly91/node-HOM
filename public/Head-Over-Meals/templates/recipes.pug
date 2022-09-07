@@ -1,0 +1,69 @@
+extends template
+
+block head
+  link(rel='stylesheet' href='/static/recipes.css')
+
+block main
+    #image-gallery
+      // search bar
+      .sort-list-div
+        #search-div
+          input#search.input-group(type='search' placeholder='"Search"')
+          svg#clear-search(viewbox='0 0 12 12' fill='none')
+            path(d='M1 1L11 11M11 1L1 11' stroke='black')
+        ul.sort-list
+          li#alphabet.sort-list-item.disable-select A
+          li#calories.sort-list-item.disable-select
+            svg.sort-svg(viewbox='0 0 44 59' fill='none' xmlns='http://www.w3.org/2000/svg')
+              path(d='M26.0695 1C24.2361 1.5 20.5607 4.5 22.061 8.5C37.2618 -2.9079 39.7075 22.7719 27.5609 30.5C26.5609 31.1362 22.939 30 22 29.5C20.939 30 17.5003 31.1362 16.5003 30.5C4.35367 22.7719 6.79954 -2.9079 22.0004 8.5' stroke='black' stroke-width='2')
+              path(d='M18 39.6885V35.6885M26 39.6885V35.6885M3.5 35.6885H40.5C41.8807 35.6885 43 34.5692 43 33.1885C43 31.8078 41.8807 30.6885 40.5 30.6885H3.5C2.11929 30.6885 1 31.8078 1 33.1885C1 34.5692 2.11929 35.6885 3.5 35.6885ZM12.4611 39.6885H31.1635C33.6518 39.6885 35.7614 41.5181 36.1133 43.9814L37.1847 51.4814C37.615 54.4935 35.2777 57.1885 32.235 57.1885H11.604C8.61765 57.1885 6.29723 54.5878 6.63631 51.6207L7.49345 44.1207C7.78206 41.5954 9.91936 39.6885 12.4611 39.6885Z' stroke='black' stroke-width='2')
+              circle(cx='22' cy='48.5' r='4' stroke='black' stroke-width='2')
+          li#time.sort-list-item.disable-select
+            svg.clock.sort-svg(viewbox='0 0 53 53' fill='none')
+              path(fill-rule='evenodd' clip-rule='evenodd' d='M50.7557 26.3779C50.7557 39.8349 39.8349 50.7558 26.3779 50.7558C12.9209 50.7558 2 39.8349 2 26.3779C2 12.9209 12.9209 2 26.3779 2C39.8349 2 50.7557 12.9209 50.7557 26.3779Z' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round')
+              path(d='M26.3779 26.1222V10.2979' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round')
+              path(d='M26.4229 26.6572L37.0698 32.8052' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round')
+              path(fill-rule='evenodd' clip-rule='evenodd' d='M28.5854 26.378C28.5854 27.5971 27.5968 28.5858 26.3777 28.5858C25.1586 28.5858 24.1699 27.5971 24.1699 26.378C24.1699 25.159 25.1586 24.1685 26.3777 24.1685C27.5968 24.1685 28.5854 25.159 28.5854 26.378Z' fill='black')
+          li.sort-list-item.disable-select
+            svg.arrow.asc(viewbox='0 0 70 74' fill='none')
+              path(d='M11.9403 73.0755C12.5342 73.6531 13.4838 73.6399 14.0614 73.046L23.4739 63.3684C24.0514 62.7746 24.0383 61.8249 23.4444 61.2473C22.8505 60.6697 21.9009 60.6829 21.3233 61.2768L12.9567 69.8791L4.35435 61.5125C3.76049 60.9349 2.81083 60.948 2.23324 61.5419C1.65564 62.1358 1.66883 63.0854 2.2627 63.663L11.9403 73.0755ZM10.5001 1.02083L11.4863 72.021L14.486 71.9794L13.4999 0.979169L10.5001 1.02083Z' fill='black')
+              rect.arrow-rect(width='47' height='6' transform='matrix(1 0 0 -1 23 58)' fill='black')
+              rect.arrow-rect(width='37' height='6' transform='matrix(1 0 0 -1 23 43)' fill='black')
+              rect.arrow-rect(width='27' height='6' transform='matrix(1 0 0 -1 23 28)' fill='black')
+      #no-result
+        p Oops, no matches found.
+      .row
+        // columns added dynamically from image-gallery.js
+      // The Modal
+      #myModal.modal(aria-labelledby='myModalLabel')
+        .modal-dialog.modal-dialog-centered
+          .modal-content
+            // Modal Header
+            .modal-header
+              h4.modal-title
+              // <button type="button" class="close" data-dismiss="modal">&times;</button>
+            // Modal body
+            .modal-body
+              button.close(type='button' data-dismiss='modal') &times;
+              // CAROUSEL
+              #carousel-container.container-fluid
+                #myCarousel.carousel.slide(data-ride='carousel' data-interval='false')
+                  // Indicators
+                  ul#indicators.carousel-indicators
+                  
+                  // The slideshow
+                  #slideshow.carousel-inner
+                  
+                
+            // Modal footer
+            .modal-footer
+              svg#previous.modal-button(viewbox='0 0 60 66' fill='none' href="#myCarousel" role="button" data-slide="prev")
+                path(d='M32.8846 0H60L27.6923 32.431L60 66H32.3077L0 32.431L32.8846 0Z' fill='#EA563F')
+              svg#next.modal-button(viewbox='0 0 60 66' fill='none' href="#myCarousel" role="button" data-slide="next")
+                path(d='M27.1154 0H0L32.3077 32.431L0 66H27.6923L60 32.431L27.1154 0Z' fill='#EA563F')
+  
+   
+    script(type="module" src='/static/scripts/recipes-index.js')
+    //- script(type="module" src='/static/scripts/new-search.js')
+//- 
+//- 
