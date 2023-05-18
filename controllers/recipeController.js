@@ -1,11 +1,11 @@
 const Recipe = require("../models/recipe");
 const { StatusCodes } = require("http-status-codes");
 const { NotFoundError, BadRequestError } = require("../errors");
-
+console.log(Recipe);
 const getAllRecipes = async (req, res) => {
   const recipes = await Recipe.find({}).sort("name");
+
   res.status(StatusCodes.OK).json({ recipes, count: recipes.length });
-  // res.status(200).send("get all recipes");
 };
 
 //get a single recipe
@@ -13,6 +13,7 @@ const getRecipe = async (req, res) => {
   const {
     params: { id: recipeId },
   } = req;
+
   const recipe = await Recipe.findOne({ _id: recipeId });
   if (!recipe) {
     throw new NotFoundError(`No recipe with id ${recipeId}`);
@@ -39,7 +40,7 @@ const patchRecipe = async (req, res) => {
   const keys = Object.keys(req.body);
   console.log(keys[0]);
 
-  for (key in keys) {
+  for (const key in keys) {
     if (!possibleKeys.includes(keys[key])) {
       throw new BadRequestError(`${keys[key]} is not a possible key`);
     }
